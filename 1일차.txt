@@ -1,0 +1,109 @@
+*설치 
+JRE가 아닌 JDK를 설치해야한다 
+왜냐, 
+JRE는 Java Runtime Environment(자바 실행환경)
+JDK는 Javav Development Kit(자바 개발도구)
+
+
+*설치 후 
+cmd에 javac 입력해도 나오는 것이 없다. 
+왜?
+윈도우즈는 javac가 뭔지 모르기 때문이다. 
+따라서 javac라고 입력할 때
+윈도우즈가 어디서 찾을지를 지정해줘야 한다. 
+어디서 찾는지는 환경변수(Environmental var) 통해서 지정해준다. 
+
+*환경변수 지정 
+알아서 잘 들어가봐라..
+변수 이름은 JAVA_HOME
+그 다음 path들어가서 %JAVA_HOME%\bin을 추가해준다. 
+
+그러면 cmd창에 javac 뜬다 
+
+설치 끝!
+
+* 옛날엔 어떻게 코딩을 했을까? 
+옛날엔 메모장, vim, 에디터플러스 같은 텍스트 편집기로 코딩을 했었다. 
+
+
+*자바 코드가 돌아가는 방법
+ 
+우리가 제일 먼저 입력하는 자바 코드 .java
+  -> 컴파일 이라는 과정이 일어난다. 
+컴파일이란 
+우리가 쓴 코드를 자바 실행환경에서 알아들을 수 있는 
+자바 바이트 코드로 변환해 주는 것이다. 
+자바 바이트 코드는 .java 파일을 .class로 변환해 준다 
+그리고 그 안에 우리가 실제 적어놨던 자바 코드를 
+자바 바이트 코드로 바꿔준다. 
+
+만약 우리가 이 .class 파일을 실행하면 
+자바 실행 환경에서 JVM을 가동한다. 
+JVM이란 Java Virtual Machine(자바 가상화 장치)의 줄임말로써 
+일종의 가상 컴퓨터이다. 
+
+왜, JVM이라는 것을 만들어서 실행 시킬까? 
+"Write once, run everywhere" = 자바의 모토 
+
+이 JVM 안에서 class 파일은 인터프리터를 통해 
+JIT 된다. 
+JIT 란 Just In Time 
+
+* 이클립스 설치 이후 
+이클립스 설치 후 가장 먼저 셋팅해야하는 것 
+1. 인코딩 변경
+인코딩이란? 
+컴퓨터에서 문자를 저장할 때 어떻게 저장할까? 
+저장시 이진법 숫자로 바꿔서 저장 
+인코딩의 조상으로 ASCII 코드가 존재했다. 
+American Standard Character for Information Interchange
+7비트로 글자를 변환했다. 
+비트란 2진법 자리수 하나를 뜻한다. 
+그럼 7비트는? 
+2진법 7자리 숫자 1개 
+즉 아스키 코드는 총 128개의 글자만 표현 가능 
+숫자 0~9까지, 소문자 a~z까지, 대문자 A~Z까지, 특수문자 몇개 
+한글은 ?
+라틴어는 ?
+일본어는 ? 
+한자는 ? 
+그래서 Unicode 라는 저장 방법이 나오게 된다. 
+유니코드는 7비트가 아니라 8바이트 저장을 하게 된다. 
+1 바이트는 몇 비트인가? 8비트 
+따라서 8바이트는 64비트 
+64비트는 2의 64승 숫자 1개 
+= 많이 많이 들어간다. 
+유니코드가 나오기 전에 한글을 조합형으로 하냐 완성형으로 하냐에 대한 논쟁이 있었다. 
+퍞 궭 -> 완성형에선 불가능한 글자 
+대신 완성형은 용량이 작았다. 
+CJK: Chinese Japanese Korean 
+ 
+2. white space tab을 탭이 아닌 스페이스 4개로 변경 
+나는 안함 
+
+
+* 시작 
+-패키지란 
+자바의 클래스를 만들 때 같은 목적을 가진 클래스를 한 패키지에 모아두는 것이 유지보수에 쉽다. 
+예를 들어 만약 화면에 표시되는 목적을 가진 클래스들은 ui 라는 패키지를 만ㄷ르어 그 안에 모아두면 된다.
+
+- 클래스란
+이 클래스 안에 어떤 정보가 들어가고 어떤 기능을 가지는지 
+코드를 적어서 내 필요에 따라서 
+클래스 변수 (객체) 만들어 
+상황에 맞게 써주는게 3세대 객체지향 프로그래밍 방법
+
+
+__________
+자바 예약어 
+
+abstract	continue	for	new	switch
+assert***	default	goto*	package	synchronized
+boolean	do	if	private	this
+break	double	implements	protected	throw
+byte	else	import	public	throws
+case	enum****	instanceof	return	transient
+catch	extends	int	short	try
+char	final	interface	static	void
+class	finally	long	strictfp**	volatile
+const*	float	native	super	while
