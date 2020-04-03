@@ -1,5 +1,9 @@
 package util;
 
+import boardProject.Board;
+import boardProject.Member;
+import boardProject.Reply;
+
 /*
  * 배열에 필요한 메소드들을 구현해 놓은 클래스 
  */
@@ -133,6 +137,221 @@ public class MyArray {
 		// index의 길이 값이 곧 마지막 index 번호가 되는 것
 
 		return arr;
+	}
+
+	// boardProject 메소드들
+	private static Board[] expand(Board[] arr) {
+		Board[] temp = new Board[arr.length];
+		for (int i = 0; i < arr.length; i++) {
+			temp[i] = arr[i];
+		}
+		arr = new Board[temp.length + 1];
+
+		for (int i = 0; i < temp.length; i++) {
+			arr[i] = temp[i];
+		}
+		return arr;
+	}
+
+	// 우리가 만든 게시글을 자동으로 add하는 메소드
+	public static Board[] add(Board[] arr, Board element) {
+		int index = arr.length;
+
+		arr = expand(arr);
+		arr[index] = element;
+
+		return arr;
+	}
+
+	// 같은 int란 무엇인가?
+	// int a와 int b가 같다 -> a와 b에 저장된 int 값이 같다.
+	// 그럼 같은 String이란 무엇인가?
+	// String a.equals(b) -> a와 b에 저장되어있는 문자열(글자들의 집합)이 같다.
+
+	// 같은 board, 같은 member, 같은 reply인지 판단할 때에는 무엇을 봐야할까?
+	// int id로 판단해야한다.
+	// 즉 id로 비교해야한다.
+	// 한번 board의 index를 구하는 메소드를 만들어보자.
+	public static int indexOf(Board[] arr, Board b) {
+		for (int i = 0; i < arr.length; i++) {
+			if (b.id == arr[i].id) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public static Board[] remove(Board[] arr, Board element) {
+		int index = indexOf(arr, element);
+
+		if (index != -1) {
+			Board[] front = new Board[index];
+
+			for (int i = 0; i < front.length; i++) {
+				front[i] = arr[i];
+			}
+
+			Board[] back = new Board[arr.length - front.length - 1];
+
+			int backIndex = 0;
+			for (int i = index + 1; i < arr.length; i++) {
+				back[backIndex] = arr[i];
+				backIndex++;
+			}
+
+			arr = new Board[front.length + back.length];
+
+			for (int i = 0; i < front.length; i++) {
+				arr[i] = front[i];
+			}
+
+			backIndex = front.length;
+			for (int i = 0; i < back.length; i++) {
+				arr[backIndex] = back[i];
+				backIndex++;
+			}
+
+		}
+		return arr; 
+	}
+
+
+	// Member에 대한 메소드
+	public static Member[] expand(Member[] memberArr) {
+		Member[] temp = new Member[memberArr.length];
+		for (int i = 0; i < memberArr.length; i++) {
+			temp[i] = memberArr[i];
+		}
+		memberArr = new Member[temp.length + 1];
+
+		for (int i = 0; i < temp.length; i++) {
+			memberArr[i] = temp[i];
+		}
+		return memberArr;
+
+	}
+
+	public static Member[] add(Member[] memberArr, Member element) {
+		int index = memberArr.length;
+
+		memberArr = expand(memberArr);
+		memberArr[index] = element;
+
+		return memberArr;
+	}
+	// 멤버를 삭제할 때 뭐를 입력받을까?
+	// 내 생각엔 id값?
+	// 그럼 int인데?
+
+	public static int indexOf(Member[] arr, Member m) {
+		for (int i = 0; i < arr.length; i++) {
+			if (m.id == arr[i].id) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public static Member[] remove(Member[] arr, Member element) {
+		int index = indexOf(arr, element);
+
+		if (index != -1) {
+			Member[] front = new Member[index];
+
+			for (int i = 0; i < front.length; i++) {
+				front[i] = arr[i];
+			}
+
+			Member[] back = new Member[arr.length - front.length - 1];
+
+			int backIndex = 0;
+			for (int i = index + 1; i < arr.length; i++) {
+				back[backIndex] = arr[i];
+				backIndex++;
+			}
+
+			arr = new Member[front.length + back.length];
+
+			for (int i = 0; i < front.length; i++) {
+				arr[i] = front[i];
+			}
+
+			backIndex = front.length;
+			for (int i = 0; i < back.length; i++) {
+				arr[backIndex] = back[i];
+				backIndex++;
+			}
+
+		}
+		return arr; // index 리턴해도 되나ㅠㅠㅠ 모르겤ㅆ다. 
+	}
+
+	// Reply에 대한 메소드
+	public static Reply[] expand(Reply[] replyArr) {
+		Reply[] temp = new Reply[replyArr.length];
+		for (int i = 0; i < replyArr.length; i++) {
+			temp[i] = replyArr[i];
+		}
+		replyArr = new Reply[temp.length + 1];
+
+		for (int i = 0; i < temp.length; i++) {
+			replyArr[i] = temp[i];
+		}
+
+		return replyArr;
+	}
+
+	public static Reply[] add(Reply[] replyArr, Reply element) {
+		int index = replyArr.length;
+
+		replyArr = expand(replyArr);
+		replyArr[index] = element;
+
+		return replyArr;
+	}
+
+	public static int indexOf(Reply[] arr, Reply r) {
+		for (int i = 0; i < arr.length; i++) {
+			if (r.id == arr[i].id) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+
+	public static Reply[] remove(Reply[] arr, Reply element) {
+		int index = indexOf(arr, element);
+
+		if (index != -1) {
+			Reply[] front = new Reply[index];
+
+			for (int i = 0; i < front.length; i++) {
+				front[i] = arr[i];
+			}
+
+			Reply[] back = new Reply[arr.length - front.length - 1];
+
+			int backIndex = 0;
+			for (int i = index + 1; i < arr.length; i++) {
+				back[backIndex] = arr[i];
+				backIndex++;
+			}
+
+			arr = new Reply[front.length + back.length];
+
+			for (int i = 0; i < front.length; i++) {
+				arr[i] = front[i];
+			}
+
+			backIndex = front.length;
+			for (int i = 0; i < back.length; i++) {
+				arr[backIndex] = back[i];
+				backIndex++;
+			}
+
+		}
+		return arr; 
 	}
 
 	// String 오버로딩
@@ -329,14 +548,13 @@ public class MyArray {
 
 		return arr;
 	}
-	
+
 	public static String[] removeByIndex(String[] arr, int index) {
-		
+
 		return (index >= 0 && index < arr.length) ? remove(arr, arr[index]) : arr;
 	}
-	
-	// test해보기 
+
+	// test해보기
 	// 그런데 얘 말고 다른데에서..
-	
-	
+
 }
