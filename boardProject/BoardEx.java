@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 
-import util.MyArray;
 // ctrl + shift + o : import 정리해줌 
 import util.MyScanner;
 
@@ -22,6 +21,23 @@ public class BoardEx {
 //				boardArr[i] = b;
 			boardArr[i] = new Board(); // 초기화 해주는 코드
 		}
+		
+		Member[] memberArr = new Member[5];
+		for(int i = 0; i < memberArr.length; i++) {
+			memberArr[i] = new Member();
+			
+		}
+		Member admin = new Member();
+		// 혹시 띄어쓰기를 인식안하게 할 순 없을까.....
+		
+		admin.userName = "admin";
+		admin.password = "1111";
+		admin.nickName = "영자";
+		admin.id = 1;
+		memberArr[0] = admin; // 배열 0번째에 admin 정보 넣음 
+		
+		
+		
 		while (true) {
 			System.out.println("게시판");
 			System.out.println("1. 글 목록 보기   2. 새로 작성하기   3. 종료");
@@ -35,11 +51,11 @@ public class BoardEx {
 				// Board[] 을 위에서 만들어준다.
 //				for(int i = 0; i < boardArr.length; i++) {
 //					System.out.println("제목 : " + boardArr[i].title);
-//					System.out.println("내용 : " + boardArr[i].content);
+//					System.out.println("내용 : " + boardArr[i].content);	
 //				}
 				// 위의 코드를 여기에 직접 넣지 말고 배열을 주면 거기서 출력해주는
 				// 메소드로 분리한다. (list())
-				BoardUtil.list(boardArr);
+				BoardUtil.list(wrapper, memberArr);
 				// 리스트보여주고 나서
 				// 해당 글에 들어가게 선택을 받는다.
 				System.out.println("1. 글 개별 보기    2. 뒤로");

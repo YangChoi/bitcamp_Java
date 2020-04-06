@@ -251,6 +251,16 @@ public class MyArray {
 		}
 		return -1;
 	}
+	
+	// 로그인을 위해서 username를 비교하는 메소드 
+	public static int indexOf(Member[] arr, String userName) {
+		for(int i = 0; i < arr.length; i++) {
+			if(userName.equals(arr[i].userName)) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	public static Member[] remove(Member[] arr, Member element) {
 		int index = indexOf(arr, element);
@@ -283,7 +293,7 @@ public class MyArray {
 			}
 
 		}
-		return arr; // index 리턴해도 되나ㅠㅠㅠ 모르겤ㅆ다. 
+		return arr; 
 	}
 
 	// Reply에 대한 메소드
@@ -310,9 +320,9 @@ public class MyArray {
 		return replyArr;
 	}
 
-	public static int indexOf(Reply[] arr, Reply r) {
-		for (int i = 0; i < arr.length; i++) {
-			if (r.id == arr[i].id) {
+	public static int indexOf(Reply[] replyArr, Reply r) {
+		for (int i = 0; i < replyArr.length; i++) {
+			if (r.id == replyArr[i].id) {
 				return i;
 			}
 		}
