@@ -1,0 +1,125 @@
+언어	프로그램 언어 
+한국어	C / C++
+영어	Java / C#
+불어	Embedded C / 
+일어		
+
+__________________________________________
+
+C :
+    Program Files
+        Java
+            jdk 1.8.0_241
+                bin - 실행파일(*.exe)
+                    javac.exe
+                    java.exe
+                jre
+            jre1.8.0_241
+
+D :
+    lib
+    java_se
+       worspace
+            HelloTest.java
+            HelloTest.class
+
+
+
+
+
+________________________________________
+
+객제지향프로그램(Object Oriented Programming) 
+> 클래스 사용 
+class HelloTest {
+	public static void main(String[] args){
+		System.out.print("안녕하세요 ");
+		System.out.print("안녕하세요 ");
+	}
+}
+
+>클래스명 
+- 첫글자는 대문자 
+
+> 메소드(함수)
+- 모든 명령어의 집합체
+- main 
+
+> 콘솔(Console) : System (콘솔 관리해주는 class) 
+입력 : 키보드 System.in 
+출력 : 화면 System.out
+. : 누구누구의 소속 
+(in은 System의 소속)
+ 
+> 저장시 
+* 파일 
+HelloTest.java
+
+__________________________________
+
+C		Java
+HelloTest.c	HelloTest.java
+(클래스 개념x)	↓
+
+C++		↓(컴파일)
+HelloTest.cpp	↓
+		↓
+>컴파일 시	↓ 
+ HelloTest.obj	HelloTest.class ( byte 코드 > 완벽한 기계어 코드가 아님)
+(기계어 코드)	
+> 실행파일 	
+ HelloTest.exe	HelloTest.exe 없음 (그래서 java는 게임프로그램 만들수 없음 )
+		JVM (JVM이 인터프리터 방식으로 윈도우냐 리눅스냐 나눔)
+
+운영체제
+(민감)
+C / C++(콘솔용)	
+Visual C(윈도우)
+Linux C(리눅스)
+
+______________________________
+
+"문자열" 		"5" - ASCII 코드 없음(비교불가)   "A" < "B" ?? : 에러 
+'문자' 		'5'  			     'A' < 'B'
+숫자		5 
+
+
+'a' + 2 = 97+ 2 = 99
+"a" + 2 = a2 (계산x, 결합)
+
+
+25  
+A
+CAR
+얘들이 숫자인지 문자인지 문자열인지 변수인지 컴퓨터는 모른다. 
+
+25 숫자  
+'A' 문자
+"CAR" 문자열
+
+
+* '문자' 
+
+	C			Java
+
+bit - 0 or 1
+    - 정보의 최소단위 
+byte - 영문자 하나 		1개, 최대 2byte(uni code)  
+      - 8 bit			
+-------------------------------------------------------
+'A'  1byte, 1개			'A'  1byte, 1개			
+"AB"  2byte, 2개			"AB"  2byte, 2개 			 
+"화"   2byte, 1개 			'화'   2byte, 1개 
+(한글 한글자당 2byte)		(한글자 이기 때문에 싱글로 침) 
+      
+	2진수		ASCII (10진수)
+'A' ------ 0100 0001 --------  65
+'B' ------ 0100 0010 --------  66	
+'C' ------ 0100 0011 --------  67
+'a' ------ 0110 0001 --------  97
+5 ------- 0000 0101 --------  5
+'5' ------ 0011 0101 --------  53
+
+'A' < 'B'
+
+'A' + 3 = 68 : D
