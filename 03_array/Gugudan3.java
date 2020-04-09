@@ -4,13 +4,15 @@ class Gugudan3 {
 	public static void main(String[] args){
 		int dan, i;
 		
-		for(int block = 1; block < 10; block+=3){
+		for(int block = 2; block <= 8; block+=3){
 			for(i = 1; i<= 9; i++){
-				for(dan = i; dan < i+3; dan++){
-					System.out.print(dan + "*" + i + "=" + dan*i+"\t");
-				}
+				for(dan = block; dan <= block+2; dan++){
+					if( dan != 10) { // 10´Ü –M
+						System.out.print(dan + "*" + i + "=" + dan*i+"\t");
+					}
+				} // for dan 
 				System.out.println();
-			}
-		}
+			} // for i  
+		} // for block 
 	}
 }
