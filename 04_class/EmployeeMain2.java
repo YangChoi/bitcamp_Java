@@ -36,6 +36,8 @@ class EmployeeMain2{
 
 		}
 		
+		
+		
 		// 출력
 		for(EmployeeDTO data : arr){
 		System.out.println("이름\t\t직급\t기본급\t수당\t세율\t월급");
