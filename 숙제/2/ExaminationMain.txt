@@ -1,0 +1,33 @@
+class Examination
+
+private String name;
+private String dap;
+private char[] ox;
+private int score;
+private static final String JUNG="11111";//정답-상수화
+
+* 메소드
+생성자 - 입력
+compare() - 비교
+getName()
+getOx()
+getScore() >> static 없음 . return 값 없음
+
+class ExaminationMain
+
+[실행결과]
+인원수 입력 : 3
+
+이름 입력 : 홍길동
+답 입력 : 13211
+
+이름 입력 : 코난
+답 입력 : 11111
+
+이름 입력 : 또치
+답 입력 : 13242
+
+이름	1 2 3 4 5	점수
+홍길동  O X X O O	60
+코난	O O O O O	100
+또치	O X X X X	20
