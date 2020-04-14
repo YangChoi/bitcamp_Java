@@ -80,7 +80,9 @@ class StringMain {
 		System.out.println("문자열 검색 = " + ee.indexOf("안녕")); // 없는 경우 -1 출력
 
 		System.out.println("문자열 치환 = " + ee.replace("오늘", "현재")); 
-		System.out.println("문자열 치환 = " + ee.replaceAll("오늘", "현재")); 
+		System.out.println("문자열 치환 = " + ee.replaceAll("오늘", "현재"));
+		
+		
 		
 	}
 }

@@ -1,0 +1,77 @@
+package date0410;
+
+import java.util.Scanner;
+
+public class BaseBall {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+
+		String choice; // 게임 실행 여부 묻기
+		int input;
+		int strike = 0; // 스트라이크 수
+		int ball = 0; // 볼 수
+
+		int[] you = new int[3]; // 내 숫자
+		int[] com = new int[3]; // 컴퓨터 숫자
+
+		// 컴퓨터 숫자 난수 넣기 ( 중복제거)
+		for (int i = 0; i < com.length; i++) {
+			com[i] = (int) (Math.random() * 9) + 1;
+			for (int k = 0; k < i; k++) {
+				if (com[i] == com[k]) {
+					i--;
+					break;
+				}
+			}
+		}
+		// 이렇게 해서 com에 난수 3개가 들어감
+
+		// 게임 실행 여부 묻기
+		// 단, 틀린 대답을 했을 경우에도 계속 묻기
+		while (true) {
+			System.out.println("게임을 실행하겠습니까? (y/n)");
+			choice = scan.next();
+
+			if (choice.equalsIgnoreCase("y")) {
+				System.out.println("게임을 시작합니다");
+
+				while (true) {
+					// 유저에게 숫자 입력받기
+					System.out.print("숫자 3개 입력 : ");
+					input = scan.nextInt();
+
+					// 정수를 자리수로 나눠서 판별
+					you[0] = input % 100;
+					you[1] = input % 10;
+					you[2] = input % 1;
+
+					// 랜덤한 int com과 유저가 입력한 String의 비교
+					for (int i = 0; i < com.length; i++) {
+						if (you[i] == com[i]) { // 인덱스 같은 경우
+							// 인덱스도 같고 값도 같은 경우 : 스트라이크
+							strike++;
+						} else if (you[i] == com[i + 1]) {
+							// 인덱스는 다르나 값은 같은 경우 : 볼
+							ball++;
+
+						} else {
+							// 다 틀린 경우는 아무것도 아님
+							break;
+						}
+					}
+					System.out.println(strike + "스트라이크" + ball + "볼");
+				} // 안쪽 while문
+
+			} else if (choice.equalsIgnoreCase("n")) {
+				System.out.println("게임에서 나갑니다");
+				break;
+			} else {
+				// 다시 게임 실행 여부 묻기
+			}
+
+		}
+
+	}
+
+}
