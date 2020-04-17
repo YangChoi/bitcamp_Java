@@ -1,0 +1,22 @@
+
+StringBuffer (append())
+- dispL 에는 오른쪽에 0이 있어야 한다. 
+- 숫자를 누를 때 마다 숫자가 누적 > inputL
+- Back을 누르면 한 글자씩 지워진다. 뒷자리가 지워짐 
+마지막을 누르면 다시 0이 나타난다. 
+계속 눌러도 Exception 발생 X
+
+- 처음에 .을 누르면 0. 이라고 나옴 
+ . 을 계속 눌러도 더이상 나오면 안된다. 
+ 숫자에서 .을 지우면 다시 .이 들어가야한다. (indexOf) 
+
+전부 if와 for문만 겁나 들어감 
+
+점찍히는 것 
+NumberFormat nf2 = new DecimalFormat("#,###.#원");
+
+버튼에 액션 입힐 때 
+if(e.getSource() == button[0])... 이거 불편. 찾는게 불편
+
+if(e.getActionCommand() == "새로만들기")
+버튼 만들 때 준 타이틀로 하기 

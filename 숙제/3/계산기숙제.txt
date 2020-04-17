@@ -1,0 +1,4 @@
+라벨 2개 
+버튼들은 전부 배열들 
+한줄씩 panel 잡아라 (8개의 panel+전체 panel 하나 1개 , 그안에 gridLayout)
+아니면 setLayout(null) 해서 밀어버리던지 (그러지말고 일단 배열을 잘 써보자 ㅠㅠ) 

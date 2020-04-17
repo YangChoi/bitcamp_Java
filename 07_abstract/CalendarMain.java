@@ -14,21 +14,15 @@ find() : 날짜 얻어오는 메소드
 display() : 출력하는 메소드 
 */
 import java.util.Scanner;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 class CalendarTest {
-	private int year; 
-	private int month;
-	public int lastDay; 
-	public int startDay;
-	public int dayOfWeek;
-
-
-	public CalendarTest(){}
-	public CalendarTest(int year, int month){
+	int year, month, lastDay, dayOfWeek;
+	
+	public CalendarTest(){
 		Scanner scan = new Scanner(System.in);
 		System.out.print("년도 입력 : ");
 		year = scan.nextInt();
@@ -36,47 +30,34 @@ class CalendarTest {
 		month = scan.nextInt();
 	}
 
-	public int getYear(){
-		return year;
-	}
-	public int getMonth(){
-		return month; 
-	}
 
 	public void find(){
 		Calendar cal = Calendar.getInstance();
 		
 		//년, 월 셋팅
-		cal.set(Calendar.YEAR, getYear());
-		cal.set(Calendar.MONTH, getMonth());
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month); 
+		// 입력받은 값으로 설정하기 
 
-		cal.set(year, month-1, 1);
+		cal.set(year, month-1, 1); 
 
 		// 해당 날짜의 요일 
-		dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); //
+		dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); 
 		// 마지막 날짜가 몇일인지 
 		lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-		
-		/*
-		if(month != 2){
-			lastDay += 30;
-		}else if((year%400 == 0) || (year%4 == 0) && (year %100 != 0)){
-			lastDay += 29;
-		}else {
-			lastDay += 28;
-		} */
 
 }
+
 	public void display(){
 		System.out.println("일\t월\t화\t수\t목\t금\t토");
-		for(int i = 1; i <= lastDay; i++){
-			for(int k = 1; i < dayOfWeek; k++){
-				System.out.print(" "); 
-				if(dayOfWeek%7 == 0){
-				System.out.println();
+		dayOfWeek = 1;
+		for(int i = 1; i <= lastDay; i++){ // 1일부터 그 달의 마지막 일까지 for문돌려서 
+			for(int k = 1; k < dayOfWeek; k++){ // 1부터 시작하는 k가 시작요일보다 작으면 
+				System.out.print(" ");  // 띄운다 
+				if(dayOfWeek%7 == 0){ // 만약 요일이랑 7이랑 나눠서 나머지 0이 되면 
+				System.out.println(); // 줄바꿈 
 				}
-				dayOfWeek++;
-				
+	
 			}
 		}
 		
@@ -86,6 +67,7 @@ class CalendarTest {
 class CalendarMain {
 	public static void main(String[] args) {
 		CalendarTest ct = new CalendarTest(); 
+		ct.find();
 		ct.display();
 	}
 }
