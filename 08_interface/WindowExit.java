@@ -1,5 +1,4 @@
-import java.awt.event.WindowListener;
-import java.awt.event.WindowEvent;
+
 
 class WindowExit implements WindowListener {
 	public void windowActivated(WindowEvent e){}
