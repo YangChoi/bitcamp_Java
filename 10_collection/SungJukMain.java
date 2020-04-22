@@ -1,7 +1,7 @@
 class SungJukMain {
 	public static void main(String[] args) {
-		SungJukMain sm = new SungJukMain();
-
-		
+		SungJukAction sa = new SungJukAction();
+		sa.menu();
+	
 	}
 }

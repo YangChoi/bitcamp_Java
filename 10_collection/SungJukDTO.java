@@ -1,20 +1,22 @@
-class SungJukDTO {
+import java.text.DecimalFormat;
+
+class SungJukDTO implements Comparable<SungJukDTO>{
 	private int no;
 	private String name; 
 	private int kor, eng, math, tot;
 	private double avg; 
 	
+
 	// 생성자
-	public SungJuk(int no, String name, int kor, int eng, int math, int tot, double avg){
+	public SungJukDTO(int no, String name, int kor, int eng, int math){
 		this.no = no; 
 		this.name = name; 
 		this.kor = kor; 
 		this.eng = eng; 
 		this.math = math;
-		this.tot = tot; 
-		this.avg = avg;
+		// 총점, 평균같이 계산하는 데이터는 생성자로 받지 않아도 된다. 
 	}
-
+	/*
 	// setter
 	public void setNo(int no){
 		this.no = no;
@@ -37,33 +39,47 @@ class SungJukDTO {
 	public void setAvg(int avg){
 		this.avg = avg;
 	}
+	*/
+
+	// 총점, 평균
+	public void calc(){
+		tot = kor + eng + math; 
+		avg = (double)tot/3;
+	}
+	
+	
 
 	// getter
 	public int getNo(){
-		return no;
+		return this.no;
 	}
 	public String getName(){
-		return name; 
+		return this.name; 
 	}
 	public int getKor(){
-		return kor; 
+		return this.kor; 
 	}
 	public int getEng(){
-		return eng; 
+		return this.eng; 
 	}
 	public int getMath(){
-		return math;	
-	}
-	public int getTot(){
-		return tot;
-	}
-	public double getAvg(){
-		return avg;
+		return this.math;	
 	}
 
 
 	@Override 
 	public String toString(){
-		return no + name + kor + eng + math + tot + avg;
+		return no +"\t"
+				+ name +"\t"
+				+ kor +"\t"
+				+ eng +"\t"
+				+ math +"\t"
+				+ tot +"\t"
+				+ new DecimalFormat("####.###").format(avg); // 소수 셋째자리까지 표현 
+	}
+
+	@Override 
+	public int compareTo(SungJukDTO o){
+		return this.tot < o.tot ? 1 : -1; // 총점으로 내림차순
 	}
 }
