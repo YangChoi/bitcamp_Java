@@ -10,18 +10,36 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 class PacMan extends Frame implements Runnable, KeyListener{
+		// 팩맨 방향, 좌표
 		private	int	sel = 2;
 		int x1 = 225;
 		int y1 = 225;
 
 		int x2 = 275;
 		int y2 = 275; 
+		
+		// 팩맨 음식
+		int[] numX = new int[5];
+		int[] numY = new int[5];
+		
+		// 팩맨 전진 
+		private int go;
+			
+		
 	
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image img = Toolkit.getDefaultToolkit().getImage("pacman.png");
 		Image foodImg = Toolkit.getDefaultToolkit().getImage("foodImg.png");
 
 	public PacMan(){
+
+		// 팩맨 음식
+		for(int i = 0; i < numX.length; i++){
+			numX[i] = (int)(Math.random()*(400-0+1))+0;
+			numY[i] = (int)(Math.random()*(400-30+1))+0;
+		}
+
+
 		setBounds(700, 200, 500, 500);
 		setVisible(true);
 		setResizable(false);
@@ -52,28 +70,13 @@ class PacMan extends Frame implements Runnable, KeyListener{
 						this);
 			// 팩맨의 입을 왔다갔다 하려면 스레드를 사용해야한다. 
 			
-			// 팩맨 먹이 그림 
-			int[] numX = new int[5];
-			int[] numY = new int[5];
-			int foodX; // 음식 x좌표
-			int foodY; // 음식 y좌표
-			
-			for(int i = 0; i < numX.length; i++){
-				foodX = (int)(Math.random()*501)+0;
-				foodY = (int)(Math.random()*501)+0;
-
-				numX[i] = foodX;
-				numY[i] = foodY;
+			// 팩맨 음식 
+			for(int i =0; i <= numX.length; i++){
+				g.drawImage(foodImg, numX[i], numY[i], this);
 			}
-			for(int i = 0; i < numX.length; i++){
-			
-				g.drawImage(foodImg, numX[i],numY[i], this);
-			} 
-		
-		
-			
 		}
 		
+		// 먹이를 적용시키려면 paint 메소드 안으로 들어가야하는데, 그렇게 되면 스레드 적용되어서 반짝반짝 됨 
 
 		@Override
 		public void run(){  
@@ -81,8 +84,44 @@ class PacMan extends Frame implements Runnable, KeyListener{
 				if(sel%2 == 0){
 					sel++; // 짝수면 sel 값 더하기 
 				}else {
-					sel--; // 홀수면 sel 값 빼기 
+					sel--; // 홀수면 sel 값 빼기  
 				} // 이걸 왔다갔다하면서 입을 연 이미지, 입을 닫은 이미지 왔다가다한다. 
+
+				// 방향에 따른 자동 움직임
+				if(sel == 2){ // right
+					x1 += 10;
+					x2 += 10;
+				}else if(sel == 1){ // left
+					x1 -= 10;
+					x2 -= 10;
+				}else if(sel == 5){ // up
+					y1 -= 10;
+					y2 -= 10;
+				}else if(sel == 7){ // down 
+					y1 += 10;
+					y2 += 10;
+				}
+
+				// 벽에 터치
+				if(x1 < 0 ){ // left로 가는 중 > right로 방향 전환 
+					sel = 2;
+					x1 += 10;
+					x2 += 10;
+				}else if(y1 < 0){ // up으로 가는 중 > down으로 방향 전환
+					sel = 7;
+					y1 += 10;
+					y2 += 10;
+				}else if(y1 >= 480){ // down으로 가는 중 > up으로 방향 전환
+					sel = 5;
+					y1 -= 10;
+					y2 -= 10;
+				}else if(x1 >= 490){ //right로 가는 중 > left로 방향 전환
+					sel = 1;
+					x1 -= 10;
+					x2 -= 10;
+
+				}
+
 				repaint(); 
 				try{ 
 					Thread.sleep(100); // cpu를 대기 상태로 
@@ -96,25 +135,21 @@ class PacMan extends Frame implements Runnable, KeyListener{
 
 		//KeyListener Overide
 		public void keyPressed(KeyEvent e){
-		
-				
-
 				if(e.getKeyCode() == KeyEvent.VK_UP){
 					y1 -= 10;
 					y2 -= 10;
 					sel = 5;
-					if(y1 == 0 && y2 == 0){
-						sel = 7; // 아래로 향하게 바꿈
-						
-					}
+				
 				}else if(e.getKeyCode() == KeyEvent.VK_DOWN){
 					y1 += 10;
 					y2 += 10;
 					sel = 7;
+					
 				}else if(e.getKeyCode() == KeyEvent.VK_LEFT){
 					x1 -= 10;
 					x2 -= 10;
 					sel = 1;
+					
 				}else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 					x1 += 10;
 					x2 += 10;
