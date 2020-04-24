@@ -76,6 +76,7 @@ class PacMan extends Frame implements Runnable, KeyListener{
 			}
 		}
 		
+
 		// 먹이를 적용시키려면 paint 메소드 안으로 들어가야하는데, 그렇게 되면 스레드 적용되어서 반짝반짝 됨 
 
 		@Override
