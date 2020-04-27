@@ -1,6 +1,13 @@
 import java.awt.Container;
 import java.awt.Color;
 
+import java.util.ArrayList;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
@@ -12,7 +19,6 @@ import javax.swing.JTextField;
 import javax.swing.JFrame;
 
 
-
 class MsPaint extends JFrame {
 	private JLabel x1L, y1L, x2L, y2L, z1L, z2L;
 	private JTextField x1T, y1T, x2T, y2T, z1T, z2T;
@@ -22,6 +28,9 @@ class MsPaint extends JFrame {
 	private JButton draw;
 	private DrCanvas can; 
 	private JPanel p1,p2;
+	private ArrayList<ShapeDTO> list; // 도형에 관한 정보들을 넣을 ArrayList
+	
+	
 
 	public MsPaint(){	
 		// 버튼
@@ -75,6 +84,7 @@ class MsPaint extends JFrame {
 		group.add(circle);
 		group.add(rect);
 		group.add(roundRect);
+		group.add(pen);
 		
 		String[] color = {"빨강", "초록", "파랑", "보라", "하늘"};
 		combo = new JComboBox<String>(color);
@@ -107,6 +117,7 @@ class MsPaint extends JFrame {
 		p.add(z2T);
 
 		p.add(fill);
+		p.add(pen);
 
 			
 		// Panel - bottom
@@ -129,8 +140,10 @@ class MsPaint extends JFrame {
 		setTitle("미니 그림판");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBackground(new Color(255, 255, 255));
-	}
+	} //  msPaint();
 
+
+	// getter 
 	public JTextField getX1T(){
 		return x1T;
 	}
@@ -149,15 +162,82 @@ class MsPaint extends JFrame {
 	public JTextField getZ2T(){
 		return z1T;
 	}
+	public JCheckBox getFill(){
+		return fill;
+	}
 
+	public JRadioButton getLine() {
+		return line;
+	}
+	public JRadioButton getCircle() {
+		return circle;
+	}
+	public JRadioButton getRect() {
+		return rect;
+	}
+	public JRadioButton getRoundRect() {
+		return roundRect;
+	}
+
+	public JRadioButton getPen() {
+		return pen;
+	}
+	
 	public JComboBox<String> getCombo(){
 		return combo;
 	}
 
-	public static void main(String[] args) {
-		new MsPaint();
+	
+	public void event(){
+		list = new ArrayList<ShapeDTO>();
+		
+		// 버튼 이벤트 
+		// interface라 new할 수 없다. >> 따라서 익명 클래스 (new는 익명 클래스를 생성해 주는 것) 
+		draw.addActionListener(new ActionListener(){
+			@Override 
+			public void actionPerformed(ActionEvent e){
+				// 그림이 다시 그려지게 
+				list.add(new ShapeDTO());
+				can.repaint();
+				// paint는 canvas가 가지고 있음 
+ 			}
+		});
+
+		// 마우스 이벤트 
+		// 마우스가 눌리는 것은 캔버스 
+		can.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e){
+				x1T.setText(e.getX()+""); // 좌표값 x 가져와서 x1T에 넣어주기 
+				// setText에는 문자형만 들어가야하는데 getX는 int형이므로 문자형으로 바꿔준다 
+				y1T.setText(e.getY()+""); 
+				
+				list.add(new ShapeDTO());
+				can.repaint();
+				
+				
+			}
+		});
+		can.addMouseMotionListener(new MouseAdapter(){
+			@Override
+			public void mouseDragged(MouseEvent e){
+				x2T.setText(e.getX()+"");
+				y2T.setText(e.getY()+""); 
+				
+				list.add(new ShapeDTO());
+				can.repaint();
+				
+				
+			}
+		
+		});
+		
+			
 	}
 
-	// 버튼액션리스너 넣기 
+	public static void main(String[] args) {
+		new MsPaint().event();
+	}
 
+	
 }
