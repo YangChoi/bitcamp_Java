@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
 class JTableEx2 extends JFrame implements ActionListener{
 	private ArrayList<PersonDTO> list; 
 	private Vector<String> vector;
-	private DefaultTableModel model; // JTableEx는 상속했었지만 이번엔 다른 방법으로
+	private DefaultTableModel model; // JTable에서 추가, 삭제 기능 못하지만 DefaultTableModel 클래스에 
+	// addRow, removeRow() 있다. 
 	private JTable table;
 	private JButton addBtn, delBtn; 
 	private JPanel p;
@@ -151,7 +152,7 @@ class JTableEx2 extends JFrame implements ActionListener{
 				// ITERATOR 말고 다른거 
 				model.removeRow(i); // i row를 지운다. 
 				// 왜냐하면 중복되는 이름을 다 제거할것이기 때문에
-				// 어떤 인덱스가 제거되면 인덱스들이 밀려버리니까. 
+				// 어떤 인덱스가 제거되면 인덱스들이 밀려버리니까. (+
 				// i에게 --해줘서 인덱스들이 다시 원상복귀 되도록 (중복되는 건 다 지워야하기 때문에)
 				i--; 
 				sw = 1;
@@ -159,7 +160,7 @@ class JTableEx2 extends JFrame implements ActionListener{
 		}// for 
 
 		if(sw == 0){
-			JOptionPane.showMessageDialog(this, "삭제할 이름이 없습니다. ");
+			JOptionPane.showMessageDialog(this, "삭제할 이름이 없습니다.");
 		}
 	}// delete()
 
