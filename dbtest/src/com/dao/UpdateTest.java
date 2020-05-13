@@ -15,15 +15,11 @@ public class UpdateTest {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private String name;
-	private int age;
-	private double height;
-
-	// 1. 설치
+	// 1. 설치 (설치는 생성자에)
 	public UpdateTest() {
 		try {
 			Class.forName(driver);
-			System.out.println("드라이버 로딩 성공 ");
+			// System.out.println("드라이버 로딩 성공 ");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -33,44 +29,53 @@ public class UpdateTest {
 	// 2. 접속
 	public void getConnection() {
 		try {
-			Class.forName(driver);
-
-			System.out.println("접속 성공");
-		} catch (ClassNotFoundException e) {
+			conn = DriverManager.getConnection(url, username, password);
+			// System.out.println("접속 성공");
+		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				// 끊어줄 땐 반대로 끊어주기
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 	public void updateArticle() {
 		Scanner scan = new Scanner(System.in);
+		System.out.print("수정할 이름을 입력하세요 :");
+		String name = scan.next();
 
-		this.getConnection();
-		String sql = "update into dbtest set age = ?, height = ? where %name% = ?";
+		// 접속
+		getConnection();
+		String sql = "update dbtest set age = age+1, height = height+1 where name like ?";
+		// ? 와 % 는 같이 안 먹힌다 %?% 안됨 : 그냥 ? 할 것
 
 		try {
-			conn = DriverManager.getConnection(url, username, password);
+			pstmt = conn.prepareStatement(sql); // 생성자(가이드 역할)
+			// 데이터 주입
+			pstmt.setString(1, "%" + name + "%");
 
-			pstmt = conn.prepareStatement(sql);
-
-			System.out.print("수정할 이름을 입력하세요 :");
-			String name = scan.next();
-			int updateAge = age + 1;
-			double updateHeight = height + 1;
-			
-			pstmt.setInt(1, updateAge);
-			pstmt.setDouble(2, updateHeight);
-			pstmt.setString(3, name);
-
-			int su = pstmt.executeUpdate();
+			int su = pstmt.executeUpdate(); // 실행 (잊지말것!!)
 			System.out.println(su + "개의 행 수정 성공했습니다");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				conn.close();
+				// 안닫아주면 메모리 떄문에 뻗는다.
+				// 꼭 닫아줄 것
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					pstmt.close();
 			} catch (SQLException e) {
 
 				e.printStackTrace();
@@ -80,8 +85,7 @@ public class UpdateTest {
 	}
 
 	public static void main(String[] args) {
-		UpdateTest updateTest = new UpdateTest();
-		updateTest.updateArticle();
+		new UpdateTest().updateArticle();
 
 	}
 
