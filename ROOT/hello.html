@@ -1,0 +1,115 @@
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>HTML 연습</title>
+  <script></script>
+  <style>
+	/*json 타입으로 들어간다 (변수 : 값)*/ 
+	td { 
+	color : #663300;
+	font-weight : bold;
+	}
+
+	#hColor {
+	color: #ccccff;
+	}
+
+	.hColor {
+	color: #9966cc;
+	}
+
+	div{
+	margin-right : 20px;
+	}
+
+	span{
+	margin-right : 20px;
+	}
+
+	a:link{
+	color: black;
+	text-decoration: none;
+	}
+	/*클릭 한 번 한 후*/
+	a:visited{
+	color: red;
+	text-decoration: none;
+	}
+	/*마우스가 올라갔을 때 */
+	a:hover{
+	color: green;
+	text-decoration: underline;
+	}
+	/*마우스를 꼭 누르고 있을 때*/
+	a:active{
+	color: blue;
+	text-decoration: none;
+	}
+
+  </style>
+ </head>
+ <body>
+ <h1 id="hColor">안녕하세요</h1> <!-- 크게, 굵게, 줄바꿈 -->
+ <!--유일할 땐(하나만 줄 때) id-->
+ <h3 class="hColor">안녕하세요</h3>
+ <!-- 여러개일 때 class -->
+ <h6>안녕하세요</h6>
+ <font size="1" color="#ccccff"><strong>반갑습니다</strong></font><br>
+ <font size="3" color="#66ccff"><strong>반갑습니다</strong></font><br>
+ <font size="5" color="#669999"><strong>반갑습니다</font></strong><br>
+ <font size="7" color="#ffcccc"><strong>반갑습니다</font></strong><br>
+ <!--html5는 <br/> -->
+
+  <table border="1">
+	<!-- 두줄 두칸 짜리 table-->
+	<tr> <!--행(줄)-->
+	 <td>가나다</td> <!-- 열(칸) -->
+	 <td>라마바</td>
+		
+	</tr>
+
+	<tr> <!--행(줄)-->
+	 <td>사아자</td> <!-- 열(칸) -->
+	 <td>차카타파하</td>
+		
+	</tr>
+	<tr>
+	 <!-- align="left, center, right" -->
+	 <td colspan="2" align="center">ABC   &nbsp;&nbsp;DEFG</td> <!--스페이스바로 암만 띄워도 한칸밖에 안띄워진다. &nbsp;를 쓰면 한 칸 띄워진다-->
+	</tr>
+	<tr>
+	 <!-- align="left, center, right" -->
+	 <td colspan="2" align="center">ABC &emsp;DEFG</td> <!-- &nbsp; : 탭-->
+	</tr>
+	<tr> 
+	 <!--rowspan 열2칸을 합친다는 뜻-->
+	 <!-- valign="top, center(middle), bottom" -->
+	 <td rowspan="2" valign="top">
+	 호랑이<br>
+	 <img src="http://localhost:8080/tomcat.png" width="100px" height="80px"> <!-- px은 점하나 -->
+	 <!-- hello.html과 같이 있기 때문에 상세한 주소 없이 tomcat.png 라고만 해도 그림이 뜬다. (절대번지)-->
+	 </td> 
+	 <td>사자</td>
+	</tr>
+	<tr> 
+	 <td>기린</td>
+	</tr>
+  </table>
+	
+  <!-- div -->
+  <br><br>
+  <div style="float:left; border:1px #cc0000 solid; width:200px; height:100px;">글씨 뭐라고 쓸까</div> <!--화면의 한 줄 -->
+  <div style="float:left; border:1px #6666ff dotted; width:200px; height:100px;">글씨 뭐라고 쓸까222</div>
+ 
+  <!-- span : 딱 글자 크기 만큼 만 잡고 들어간다 --> 
+  <span style="border: 1px #cc0000 solid; cursor:pointer;" onclick="javascript:location.href='https://news.naver.com/main/read.nhn?oid=003&aid=0003589822'">호랑이</span>
+  <!--on : ~할 때 -->
+  <span style="border: 1px #6666ff dotted;">배고프다 </span>
+
+  <br><br>
+  <a href="#" target="_blank">네이버</a>
+ </body>
+</html>
+
+
+<!-- 주석 -->
