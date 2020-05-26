@@ -2,36 +2,39 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
   <title>Document</title>
  </head>
  <body>
+ <form method="get" action="http://localhost:8080/ParamServlet">
+ <!--Form 태그는 여러개 만들어도 되지만 form 태그 안에 form 태그를 또 생성하는 것은 불가하다 -->
 	<table border="1">
 		<tr>
-		<td>이름</td>
+		<td width="70" align="center">이름</td>
+		<!--위에도 길이 70을 주면 아래도 같이 변한다. -->
+		<!--align은 각자 해준다-->
 		<td>
-			<input type="text">
+			<input type="text" name="name">
 		</td>
 		</tr>
 
 		<tr>
-		<td>나이</td>
+		<td align="center">나이</td>
 		<td>
-			<input type="text">
+			<input type="text" name="age" size="7" maxlength="3">
+			<!-- maxlength : 입력할 수 있는 문자 최대수 -->
 		</td>
 		</tr>
 
 		<tr>
 		<td colspan="2" align="center">
-		<input type="button" name="submit" value="보내기">
-		
-		<input type="button" name="reset" value="취소">		
+		<input type="submit" name="submit" value="보내기">
+		<!--이동을 위한 속성값 submit ~ action , 데이터를 들고 이동한다(submit만)- get, post 선택-->
+		<!--button ~ onclick : 데이터를 가지고 이동 불가한다. 그저 클릭만 수행한다-->
+		<input type="reset" name="reset" value="취소">		
 		</td>
 		</tr>
 
 	</table>
+</form>
  </body>
 </html>

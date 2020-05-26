@@ -36,4 +36,14 @@
   	<servlet-name>hello</servlet-name>
 	<url-pattern>/hello</url-pattern> 
   </servlet-mapping>
+
+   <servlet>
+	<servlet-name>ParamServlet</servlet-name>
+	<servlet-class>com.param.ParamServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+  	<servlet-name>ParamServlet</servlet-name>
+	<url-pattern>/ParamServlet</url-pattern> 
+  </servlet-mapping>
 </web-app>
