@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>방명록</title>
+</head>
+<body>
+	<form name="guestbookWriteForm" method="post" action="/guestbookServlet/GuestbookServlet">
+		<h3> 글쓰기 </h3>
+		<table border=3px;>
+			<tr>
+				<td>작성자</td>
+				<td>
+					<input type="text" name="name" placeholder="작성자입력">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>이메일</td>
+				<td>
+					<input type="text" name="email" placeholder="이메일입력">
+				</td>
+			</tr>
+			<tr>
+				<td>홈페이지</td>
+				<td>
+					<input type="text" name="homepage" value="http://">
+				</td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td>
+					<input type="text" name="subject" placeholder="제목입력">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>내용</td>
+				<td>
+					<textarea name="content" cols="50" rows="10" placeholder="내용을 입력"></textarea>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" align="center">
+				
+				
+				<input type="button" value="글작성" onclick="javascript:checkForm()"> 
+				
+				<input type="reset" value="다시작성 ">
+			
+				<input type="button" value="글목록" onclick="location.href='/guestbookServlet/GuestbookListServlet'">
+				
+				
+				</td>
+				
+			</tr>
+			
+		
+		</table>
+	</form>
+</body>
+<script type="text/javascript" src="../js/guestbook.js"></script>
+</html>

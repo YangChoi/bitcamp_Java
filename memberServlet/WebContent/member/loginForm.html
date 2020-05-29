@@ -2,11 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 </head>
 <body>
-	<form name="loginForm" method="post" action="/">
-	<h2 align=center>로그인 폼</h2>
+	<form name="loginForm" method="post" action="/memberServlet/LoginServlet">
+	<h2 align=center>로그인</h2>
+	
 		<table align=center>
 			<tr>
 				<td>아이디</td>
@@ -17,11 +18,12 @@
 				<td><input type="password" name="pwd"></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="button" value="로그인"
-					onclick="javascript:checkLoginForm()"> <input type="button"
-					value="회원가입" onclick="location.href='member/loginForm.html'"></td>
+				<td colspan="2" align="center">
+				<input type="button" value="로그인" onclick="javascript:checkLoginForm()"> 
+				<input type="button" value="회원가입 " onclick="location.href='writeForm.html'"></td>
 			</tr>
 		</table>
 	</form>
 </body>
+<script type="text/javascript" src="../js/member.js"></script>
 </html>

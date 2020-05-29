@@ -74,7 +74,10 @@ public class WriteServlet extends HttpServlet {
 		
 		if(su == 1) {
 			out.println("회원가입 성공!");
-			out.println("<input type='button' value='로그인'onclick='location.href='member/loginForm.html'\'>");
+			out.println("<br><br>");
+			out.println("<input type='button' value='로그인' onclick=location.href='http://localhost:8080/memberServlet/member/loginForm.html'>");
+			// 회원가입이 된 상태에서 새로고침하면 저장된 데이터를 또 저장하려고 하기 때문에 중복된 코드를 저장하려해서 무결성 제약조건 에러가 발생한다. ㄴ
+			
 		}else {
 			out.println("회원가입 실패"); // 그런데 실패할 일은 거의 없다. 
 		}

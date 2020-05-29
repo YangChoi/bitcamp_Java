@@ -98,22 +98,31 @@ public class MemberDAO {
 	}
 	
 	public String loginMember(String id, String pwd) {
+		// LoginServlet 에서 두개의 데이터가 온다. (id, pwd)
+		
+		String name = null; // return 값으로 name을 준다 
+		
 		MemberDTO memberDTO = new MemberDTO();
 
-		String sql = "select id=?, pwd=? from employees";
+		String sql = "select * from member where id=? and pwd=?";
+		getConnection();
+		
 		try {
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+			pstmt = con.prepareStatement(sql); // sql 처리 
 			
-			while(rs.next()) {
-				memberDTO.setId(rs.getString("id"));
-				memberDTO.setPwd(rs.getString("pwd"));
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			
+			rs = pstmt.executeQuery(); // select이기 때문에 executeQuery
+			// rs 값은 딱 한 줄 나온다. 
+			// 만약 틀리면 아예 안나온다. 
+			// 반복문을 돌리기 보다는 if문으로 맞는지 아닌지 본다. 
+			if(rs.next()) {
+				// 우리는 그런데 위의 12개의 항목이 다 필요하지 않다. 
+				// name 만 가져가면 된다. 
+				name = rs.getString("name");
+				// 해당되는 애가 없다면 null 값인 name이 갈 것 이다. 
 			}
-			
-			pstmt.setString(1, memberDTO.getId());
-			pstmt.setString(2, memberDTO.getPwd());
-			
-	
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -126,7 +135,8 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return name;
+		
 	}
 
 	
