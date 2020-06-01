@@ -1,5 +1,8 @@
 package guestbook.bean;
 
+import lombok.Data;
+
+@Data
 public class GuestbookDTO {
 	private int seq; 
 	private String name; 
@@ -8,52 +11,9 @@ public class GuestbookDTO {
 	private String subject;
 	private String content;
 	private String logtime;
-	// seq 랑 date (시스템 상에서 제공하는 것들) 도 dto에? 
 	
+	//lombok 세팅 (롬복에게 getter setter를 시킨다)
 	
-	// setter getter 
-	public int getSeq() {
-		return seq;
-	}
-	public void setSeq(int seq) {
-		this.seq = seq;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getHomepage() {
-		return homepage;
-	}
-	public void setHomepage(String homepage) {
-		this.homepage = homepage;
-	}
-	public String getSubject() {
-		return subject;
-	}
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getLogtime() {
-		return logtime;
-	}
-	public void setLogtime(String logtime) {
-		this.logtime = logtime;
-	}
-	
+	// @Data - setter/getter, 기본생성자, toString(), equals(), hashCode() 다 만들어줌 
 	
 }

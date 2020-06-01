@@ -5,7 +5,7 @@
 <title>방명록</title>
 </head>
 <body>
-	<form name="guestbookWriteForm" method="post" action="/guestbookServlet/GuestbookServlet">
+	<form name="guestbookWriteForm" method="post" action="/guestbookServlet/GuestbookWriteServlet">
 		<h3> 글쓰기 </h3>
 		<table border=3px;>
 			<tr>
@@ -30,14 +30,15 @@
 			<tr>
 				<td>제목</td>
 				<td>
-					<input type="text" name="subject" placeholder="제목입력">
+					<input type="text" id="subject" name="subject" placeholder="제목입력">
 				</td>
 			</tr>
 			
 			<tr>
 				<td>내용</td>
 				<td>
-					<textarea name="content" cols="50" rows="10" placeholder="내용을 입력"></textarea>
+					<!-- value 속성이 없는 textarea -->
+					<textarea name="content" id="content" cols="50" rows="10" style="resize:none;" placeholder="내용을 입력"></textarea>
 				</td>
 			</tr>
 			
@@ -49,8 +50,8 @@
 				
 				<input type="reset" value="다시작성 ">
 			
-				<input type="button" value="글목록" onclick="location.href='/guestbookServlet/GuestbookListServlet'">
-				
+				<input type="button" value="글목록" onclick="location.href='/guestbookServlet/GuestbookListServlet?pg=1'">
+				<!-- 페이징 처리, 글 목록의 1페이지를 보여주세요  -->
 				
 				</td>
 				
