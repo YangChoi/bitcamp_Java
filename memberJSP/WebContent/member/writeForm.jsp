@@ -44,7 +44,7 @@
 						<option value="gmail">
 						<option value="naver">
 					</datalist></td>
-				</select>
+			
 			</tr>
 			<tr>
 				<td>핸드폰</td>
@@ -58,16 +58,15 @@
 			<tr>
 				<td>주소</td>
 
-				<td><input type="text" name="zipcode" id="zipcode" size=7
-					readonly> <input type="button" value="우편주소검색"
-					onclick="checkPost()"><br> <input type="text"
-					name="addr1" id="addr1" size=50 readonly><br> <input
-					type="text" name="addr2" id="addr2" size=50></td>
+				<td><input type="text" name="zipcode" id="zipcode" size=7 readonly>
+					<input type="button" value="우편주소검색" onclick="checkPost()"><br> 
+					<input type="text" name="addr1" id="addr1" size=50 readonly placeholder="주소입력"><br> 
+					<input type="text" name="addr2" id="addr2" size=50 placeholder="상세주소입력"></td>
 			</tr>
 
 			<tr>
 				<td colspan="2" align="center"><input type="button"
-					value="회원가입" onclick="javascript:checkWriteForm()">&emsp; <input
+					value="회원가입" onclick="checkWriteForm()">&emsp; <input
 					type="reset" value="다시작성"></td>
 
 			</tr>
@@ -77,9 +76,5 @@
 
 </body>
 
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="../js/member.js">
-	
-</script>
+<script type="text/javascript" src="../js/member.js"></script>
 </html>
