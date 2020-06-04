@@ -8,9 +8,9 @@ function checkWriteForm() {
 		alert("비밀번호를 입력하세요.");
 	} else if (document.writeForm.pwd.value != document.writeForm.repwd.value) {
 		alert("비밀번호가 일치하지 않습니다");
-	}else if(document.writeForm.id.value != ""){
+	}else if(document.writeForm.id.value != document.writeForm.id.idDuplicationCheck){
 		alert("아이디 중복체크를 해주세요. ");
-		document.writeForm.id.focus();
+		
 	}else {
 		document.writeForm.submit();
 	}
@@ -27,6 +27,11 @@ function checkLoginForm(){
 	}
 }
 
+// 회원정보 수정시 
+function modifyInfo(){
+	
+}
+
 function checkId(){
 	// var보다는 지역변수 let을 더 추천
 	let id = document.writeForm.id.value;
@@ -41,10 +46,20 @@ function checkIdClose(id){
 	// document는 현재의 창을 말하는 것 
 	// opener를 하면 원래 열려있던 창 
 	opener.writeForm.id.value = id;
+	// 중복확인 버튼 눌렀는지 안눌렀는지 확인 
+	opener.writeForm.idDuplicationCheck.value=id; 
 	window.close(); // 창 닫고
 	opener.writeForm.pwd.focus(); // 포커스 맞추기 
 }
 
 function checkPost(){
-	window.open("checkPost.jsp","","width=500 height=500");
+	window.open("checkPost.jsp","","width=500 height=500 scrollbars=yest");
+}
+
+function checkPostClose(zipcode, address){	
+	opener.writeForm.zipcode.value = zipcode;
+	opener.writeForm.addr1.value = address;
+	window.close();
+	opener.writeForm.addr2.focus(); // 상세주소에 포커스 
+	
 }

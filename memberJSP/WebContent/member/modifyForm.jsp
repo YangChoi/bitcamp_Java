@@ -1,32 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="member.dao.MemberDAO"
+    import="member.bean.MemberDTO"
+      %>
+    
+<%
+
+MemberDTO memberdto = new MemberDTO();
+
+MemberDAO memberDAO = MemberDAO.getInstance();
+String id = request.getParameter("id");
+String pwd = request.getParameter("pwd");
+
+
+String name = memberDAO.loginMember(id, pwd);
+System.out.println(id + "," + pwd);
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>WriteForm</title>
+<title>회원정보수정</title>
 <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/writeFormCss.css">
-
 </head>
 <body onresize="parent.resizeTo(646,435)" onload="parent.resizeTo(646,435)">
 	<form name="writeForm" method="post" action=/memberJSP/checkId.jsp>
 		<table>
 			<tr width="70">
 				<td>이름</td>
-				<td><input type="text" name="name" id="name" placeholder="이름입력"
-					size=10></td>
+				<td><%=id %></td>
 			</tr>
 
 			<tr width="70">
 				<td>아이디</td>
-				<td><input type="text" name="id" placeholder="아이디입력" size=15>
-					<input type="button" id="button0" value="중복체크" onclick="checkId()"></td>
+				<td><%=id %>
+					<input type="button" id="button0" value="중복체크" onclick="checkId()" disabled></td>
 					<input type="hidden" name="idDuplicationCheck" value="">
 			</tr>
 			<tr width="70">
 				<td>비밀번호</td>
-				<td><input type="password" name="pwd"></td>
+				<td><input type="password" name="pwd" ></td>
 			</tr>
 			<tr width="70">
 				<td>비밀번호 재확인</td>
@@ -68,7 +83,7 @@
 
 			<tr>
 				<td colspan="2" align="center"><input type="button"
-					id = "button1" value="회원가입" onclick="checkWriteForm()">&emsp; <input
+					id = "button1" value="회원정보수정" onclick="modifyInfo()">&emsp; <input
 					type="reset" id = "button2" value="다시작성"></td>
 
 			</tr>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" import="member.dao.MemberDAO"%>
 
 <%
-	// 데이터 받기 
+// 데이터 받기 
 String id = request.getParameter("id");
 
 // DB에 간다 

@@ -5,8 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import member.bean.MemberDTO;
+import member.bean.ZipcodeDTO;
 
 public class MemberDAO {
 	private static MemberDAO instance;
@@ -147,15 +150,16 @@ public class MemberDAO {
 
 		String sql = "select * from member where id=?";
 		getConnection();
-		
+
 		try {
 			pstmt = con.prepareStatement(sql); // sql 처리
 			pstmt.setString(1, id);
-			
-			rs = pstmt.executeQuery(); // 실행 
-			
-			if(rs.next()) exist = true;
-			
+
+			rs = pstmt.executeQuery(); // 실행
+
+			if (rs.next())
+				exist = true;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -172,6 +176,61 @@ public class MemberDAO {
 		}
 		return exist;
 
+	}
+
+	public List<ZipcodeDTO> getZipcodeList(String sido, String sigungu, String roadname) {
+		List<ZipcodeDTO> list = new ArrayList<ZipcodeDTO>();
+
+		// sigungu 중 없는 값은 문자열 아무 거나로 채우도록 한다 (nvl)
+		String sql = "select * from newzipcode " + "where sido like ? and nvl(sigungu, '0') like ? and roadname like ?";
+		getConnection();
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, "%" + sido + "%");
+			pstmt.setString(2, "%" + sigungu + "%");
+			pstmt.setString(3, "%" + roadname + "%");
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ZipcodeDTO zipcodeDTO = new ZipcodeDTO();
+
+				zipcodeDTO.setZipcode(rs.getString("zipcode"));
+				zipcodeDTO.setSido(rs.getString("sido"));
+				zipcodeDTO.setSigungu(rs.getString("sigungu") == null ? "" : rs.getString("sigungu"));
+				zipcodeDTO.setYubmyundong(rs.getString("yubmyundong"));
+
+				zipcodeDTO.setRi(rs.getString("ri") == null ? "" : rs.getString("ri"));
+
+				zipcodeDTO.setRoadname(rs.getString("roadname"));
+				zipcodeDTO.setBuildingname(rs.getString("buildingname") == null ? "" : rs.getString("buildingname"));
+
+				list.add(zipcodeDTO);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		}
+		return list;
+	}
+
+	public int updateMember(MemberDTO memberDTO) {
+		
 	}
 
 }
