@@ -17,7 +17,7 @@ th, td {
 	border-bottom: 1px solid #ddd;
 }
 
-#button, #reset {
+#button, #button2 {
 	background-color: white;
 	color: black;
 	border: 2px solid #3385ff;
@@ -28,13 +28,15 @@ th, td {
 	color: white;
 }
 
-#reset:hover {
+#button2:hover {
 	background-color: #3385ff;
 	color: white;
 }
 </style>
 <body>
+
 	<form name="loginForm" method="post" action="login.jsp">
+	<h3 text-align="center">로그인</h3>
 		<table>
 			<tr>
 				<td>아이디</td>
@@ -49,7 +51,7 @@ th, td {
 			<tr>
 				<td>
 					<input type="button" id="button" value="로그인" onclick="checkLoginForm()"> 
-					<input type="reset" id="reset" value="취소">
+					<input type="button" id="button2" value="회원가입">
 				<td>
 			</tr>
 		</table>

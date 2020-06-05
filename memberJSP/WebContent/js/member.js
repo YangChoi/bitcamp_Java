@@ -28,10 +28,18 @@ function checkLoginForm(){
 }
 
 // 회원정보 수정시 
-function modifyInfo(){
-	
+function checkModifyForm() {
+	if (document.modifyForm.name.value == "") {
+		alert("이름을 입력하세요");
+		document.modifyForm.name.focus();
+	} else if (document.modifyForm.pwd.value == "") {
+		alert("비밀번호를 입력하세요.");
+	} else if (document.modifyForm.pwd.value != document.modifyForm.repwd.value) {
+		alert("비밀번호가 일치하지 않습니다");
+	}else {
+		document.modifyForm.submit();
+	}
 }
-
 function checkId(){
 	// var보다는 지역변수 let을 더 추천
 	let id = document.writeForm.id.value;
@@ -61,5 +69,13 @@ function checkPostClose(zipcode, address){
 	opener.writeForm.addr1.value = address;
 	window.close();
 	opener.writeForm.addr2.focus(); // 상세주소에 포커스 
+	
+}
+
+function checkPostClose(zipcode, address){	
+	opener.modifyForm.zipcode.value = zipcode;
+	opener.modifyForm.addr1.value = address;
+	window.close();
+	opener.modifyForm.addr2.focus(); // 상세주소에 포커스 
 	
 }
