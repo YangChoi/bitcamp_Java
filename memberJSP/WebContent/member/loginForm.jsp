@@ -35,7 +35,7 @@ th, td {
 </style>
 <body>
 
-	<!--  <form name="loginForm" method="post" action="login.jsp">-->
+	<form name="loginForm" method="post" action="login.jsp">
 	<h3 text-align="center">로그인</h3>
 		<table>
 			<tr>
@@ -62,9 +62,6 @@ th, td {
 </html>
 
 
-<% 
-request.setAttribute("id", "passward");
+<%-- 
 
-//페이지 이동
-response.sendRedirect("login.jsp"); 
-%>
+response.sendRedirect("login.jsp"); --%>
