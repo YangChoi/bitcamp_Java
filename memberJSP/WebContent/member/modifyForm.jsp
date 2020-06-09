@@ -19,12 +19,12 @@ MemberDTO memberDTO = memberDAO.getMember(id);
 <head>
 <meta charset="UTF-8">
 <title>회원정보수정</title>
-<link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+<!-- <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="../css/writeFormCss.css">
 </head>
 <body onresize="parent.resizeTo(646,435)" onload="parent.resizeTo(646,435)">
 
-	<form name="modifyForm" method="post" action="">
+	<form name="modifyForm" method="post" action="modify.jsp">
 		<table>
 			<tr width="70">
 				<td>이름</td>

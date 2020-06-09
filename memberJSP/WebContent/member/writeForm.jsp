@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>WriteForm</title>
-<link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+<!-- <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="../css/writeFormCss.css">
 
 </head>
 <body onresize="parent.resizeTo(646,435)" onload="parent.resizeTo(646,435)">
-	<form name="writeForm" method="post" action=/memberJSP/checkId.jsp>
+	<form name="writeForm" method="post" action="write.jsp">
 		<table>
 			<tr width="70">
 				<td>이름</td>
@@ -26,7 +26,7 @@
 			</tr>
 			<tr width="70">
 				<td>비밀번호</td>
-				<td><input type="password" name="pwd"></td>
+				<td><input type="password" name="pwd" id = "pwd" ></td>
 			</tr>
 			<tr width="70">
 				<td>비밀번호 재확인</td>

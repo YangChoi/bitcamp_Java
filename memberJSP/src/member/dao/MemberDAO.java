@@ -281,5 +281,106 @@ public class MemberDAO {
 		
 		return memberDTO; 
 	}
+	
+	public void modifyMember(MemberDTO memberDTO) {
+		getConnection();
+		  String sql = "update member set name=?,"
+                  + " pwd=?,"
+                  + " gender=?,"
+                  + " email1=?,"
+                  + " email2=?,"
+                  + " tel1=?,"
+                  + " tel2=?,"
+                  + " tel3=?,"
+                  + " zipcode=?,"
+                  + " addr1=?,"
+                  + " addr2=?,"
+                  + " logtime=sysdate"
+                  + " where id=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberDTO.getName());
+			pstmt.setString(2, memberDTO.getPwd());
+			pstmt.setString(3, memberDTO.getGender());
+			pstmt.setString(4, memberDTO.getEmail1());
+			pstmt.setString(5, memberDTO.getEmail2());
+			pstmt.setString(6, memberDTO.getTel1());
+			pstmt.setString(7, memberDTO.getTel2());
+			pstmt.setString(8, memberDTO.getTel3());
+			pstmt.setString(9, memberDTO.getZipcode());
+			pstmt.setString(10, memberDTO.getAddr1());
+			pstmt.setString(11, memberDTO.getAddr2());
+			pstmt.setString(12, memberDTO.getId());
+			
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					pstmt.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	public void InsertMember(MemberDTO memberDTO) {
+		getConnection();
+		String sql = "Insert into member name=?,"
+										+ "id=?"
+										+ "pwd=?,"
+										+ "gender=?,"
+										+ "email1=?,"
+										+ "email2=?,"
+										+ "tel1=?,"
+										+ "tel2=?,"
+										+ "tel2=?,"
+										+ "zipcode=?,"
+										+ "addr1=?,"
+										+ "addr2=?,"
+										+ "logtime=sysdate";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberDTO.getName());
+			pstmt.setString(2, memberDTO.getId());
+			pstmt.setString(3, memberDTO.getPwd());
+			pstmt.setString(4, memberDTO.getGender());
+			pstmt.setString(5, memberDTO.getEmail1());
+			pstmt.setString(6, memberDTO.getEmail2());
+			pstmt.setString(7, memberDTO.getTel1());
+			pstmt.setString(8, memberDTO.getTel2());
+			pstmt.setString(9, memberDTO.getTel3());
+			pstmt.setString(10, memberDTO.getZipcode());
+			pstmt.setString(11, memberDTO.getAddr1());
+			pstmt.setString(12, memberDTO.getAddr2());
+
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					pstmt.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
 
 }

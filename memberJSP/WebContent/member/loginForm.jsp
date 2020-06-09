@@ -35,7 +35,7 @@ th, td {
 </style>
 <body>
 
-	<form name="loginForm" method="post" action="login.jsp">
+	<!--  <form name="loginForm" method="post" action="login.jsp">-->
 	<h3 text-align="center">로그인</h3>
 		<table>
 			<tr>
@@ -51,7 +51,7 @@ th, td {
 			<tr>
 				<td>
 					<input type="button" id="button" value="로그인" onclick="checkLoginForm()"> 
-					<input type="button" id="button2" value="회원가입">
+					<input type="button" id="button2" value="회원가입" onclick="location.href='writeForm.jsp'" >
 				<td>
 			</tr>
 		</table>
@@ -60,3 +60,11 @@ th, td {
 </body>
 <script type="text/javascript" src="../js/member.js"></script>
 </html>
+
+
+<% 
+request.setAttribute("id", "passward");
+
+//페이지 이동
+response.sendRedirect("login.jsp"); 
+%>

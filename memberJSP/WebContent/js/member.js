@@ -8,7 +8,7 @@ function checkWriteForm() {
 		alert("비밀번호를 입력하세요.");
 	} else if (document.writeForm.pwd.value != document.writeForm.repwd.value) {
 		alert("비밀번호가 일치하지 않습니다");
-	}else if(document.writeForm.id.value != document.writeForm.id.idDuplicationCheck){
+	}else if(document.writeForm.id.value != document.writeForm.id.idDuplicationCheck.value){
 		alert("아이디 중복체크를 해주세요. ");
 		
 	}else {
@@ -53,7 +53,7 @@ function checkId(){
 function checkIdClose(id){
 	// document는 현재의 창을 말하는 것 
 	// opener를 하면 원래 열려있던 창 
-	opener.writeForm.id.value = id;
+	opener.writeForm.id.value= id;
 	// 중복확인 버튼 눌렀는지 안눌렀는지 확인 
 	opener.writeForm.idDuplicationCheck.value=id; 
 	window.close(); // 창 닫고
@@ -61,21 +61,50 @@ function checkIdClose(id){
 }
 
 function checkPost(){
-	window.open("checkPost.jsp","","width=500 height=500 scrollbars=yest");
+	window.open("checkPost.jsp","","width=500 height=500 scrollbars=yes");
 }
 
+// 여러개의 form을 관리해주는 객체 forms
 function checkPostClose(zipcode, address){	
-	opener.writeForm.zipcode.value = zipcode;
-	opener.writeForm.addr1.value = address;
+	/*
+	opener.document.forms[0].zipcode.value = zipcode;
+	opener.document.forms[0].addr1.value = address;
 	window.close();
-	opener.writeForm.addr2.focus(); // 상세주소에 포커스 
+	opener.document.forms[0].addr2.focus(); // 상세주소에 포커스 
+	*/
+	// 그러나 아래의 코드가 더 자주 쓰인다. 
+	opener.document.getElementById("zipcode").value = zipcode;
+	opener.document.getElementById("addr1").value = address;
+	window.close();
+	opener.document.getElementById("addr2").focus(); // 상세주소에 포커스 
 	
 }
 
-function checkPostClose(zipcode, address){	
-	opener.modifyForm.zipcode.value = zipcode;
-	opener.modifyForm.addr1.value = address;
-	window.close();
-	opener.modifyForm.addr2.focus(); // 상세주소에 포커스 
-	
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

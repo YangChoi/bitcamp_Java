@@ -26,6 +26,7 @@ System.out.println(id + "," + pwd);
 * {
 	font-family: 'Jeju Gothic', sans-serif;
 }
+
 #button, #logoutBtn, #modifyBtn{
 	background-color: white;
 	color: black;
@@ -54,6 +55,7 @@ System.out.println(id + "," + pwd);
  
 <%if(name == null){ %>
 	아이디 또는 비밀번호가 맞지 않습니다. 
+	<input type="button" id="button" value="로그인" onclick="location.href='loginForm.jsp'">
 	<input type="button" id="button" value="회원가입" onclick="location.href='writeForm.jsp'">
 	<br><br>
 <%}else { %>
