@@ -100,13 +100,12 @@ public class MemberDAO {
 		return su;
 	}
 
-	public String loginMember(String id, String pwd) {
-		// LoginServlet 에서 두개의 데이터가 온다. (id, pwd)
+	public MemberDTO loginMember(String id, String pwd) {
+		
 
-		String name = null; // return 값으로 name을 준다
-
-		MemberDTO memberDTO = new MemberDTO();
-
+		MemberDTO memberDTO = null;
+		
+		
 		String sql = "select * from member where id=? and pwd=?";
 		getConnection();
 
@@ -121,9 +120,20 @@ public class MemberDAO {
 			// 만약 틀리면 아예 안나온다.
 			// 반복문을 돌리기 보다는 if문으로 맞는지 아닌지 본다.
 			if (rs.next()) {
-				// 우리는 그런데 위의 12개의 항목이 다 필요하지 않다.
-				// name 만 가져가면 된다.
-				name = rs.getString("name");
+				memberDTO = new MemberDTO();
+				memberDTO.setName(rs.getString("name"));
+				memberDTO.setId(rs.getString("id"));
+				memberDTO.setPwd(rs.getString("pwd"));
+				memberDTO.setGender(rs.getString("gender"));
+				memberDTO.setEmail1(rs.getString("email1"));
+				memberDTO.setEmail2(rs.getString("email2"));
+				memberDTO.setTel1(rs.getString("tel1"));
+				memberDTO.setTel2(rs.getString("tel2"));
+				memberDTO.setTel3(rs.getString("tel3"));
+				memberDTO.setZipcode(rs.getString("zipcode"));
+				memberDTO.setAddr1(rs.getString("addr1"));
+				memberDTO.setAddr2(rs.getString("addr2"));
+				
 				// 해당되는 애가 없다면 null 값인 name이 갈 것 이다.
 			}
 
@@ -141,7 +151,7 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
-		return name;
+		return memberDTO;
 
 	}
 
@@ -177,6 +187,9 @@ public class MemberDAO {
 		return exist;
 
 	}
+	
+
+
 
 	public List<ZipcodeDTO> getZipcodeList(String sido, String sigungu, String roadname) {
 		List<ZipcodeDTO> list = new ArrayList<ZipcodeDTO>();

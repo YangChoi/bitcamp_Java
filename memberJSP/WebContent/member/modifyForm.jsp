@@ -5,9 +5,10 @@
 %>
     
 <%
-
-String id = request.getParameter("id");
-
+// 데이터 
+//String id = request.getParameter("id");
+// 데이터가 주소가 아닌 세션을 타고 옴
+String id = (String)session.getAttribute("memId");
 // db
 MemberDAO memberDAO = MemberDAO.getInstance();
 MemberDTO memberDTO = memberDAO.getMember(id);
