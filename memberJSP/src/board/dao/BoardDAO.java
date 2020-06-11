@@ -200,7 +200,88 @@ public class BoardDAO {
 		}
 		return totalA;
 	}
+	
+	
+	// seq로 글 찾는 메서드
+	public BoardDTO boardView(int seq) {
+		BoardDTO boardDTO = null;
 
+		getConnection();
+		
+		String sql = "select * from board where seq=?";
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, seq);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				boardDTO = new BoardDTO();
+				
+				boardDTO.setSeq(rs.getInt("seq"));
+				boardDTO.setId(rs.getString("id"));
+				boardDTO.setName(rs.getString("name"));
+				boardDTO.setEmail(rs.getString("email"));
+				boardDTO.setSubject(rs.getString("subject"));
+				boardDTO.setContent(rs.getString("content"));
+				boardDTO.setRef(rs.getInt("ref"));
+				boardDTO.setLev(rs.getInt("lev"));
+				boardDTO.setStep(rs.getInt("step"));
+				boardDTO.setPseq(rs.getInt("pseq"));
+				boardDTO.setReply(rs.getInt("reply"));
+				boardDTO.setHit(rs.getInt("hit"));
+				boardDTO.setLogtime(rs.getDate("logtime"));	
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return boardDTO;
+		
+	}
+	
+	public void boardModify(int seq, String subject, String content) {
+		BoardDTO boardDTO = new BoardDTO();
+		
+		getConnection();
+		
+		String sql = "update board set subject=?, content=?, logtime=sysdate where seq=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, boardDTO.getSubject());
+			pstmt.setString(2, boardDTO.getContent());
+			pstmt.setInt(3, boardDTO.getSeq());
+			
+			pstmt.executeQuery();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
 
 	
