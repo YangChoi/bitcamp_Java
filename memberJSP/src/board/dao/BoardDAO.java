@@ -9,21 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import board.bean.BoardDTO;
 import member.dao.MemberDAO;
 
 public class BoardDAO {
 	private static BoardDAO instance;
-
+	/*
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String username = "c##java";
 	private String password = "bit";
-
+	 */
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-
+	private DataSource ds;
+	
+	
 	public static BoardDAO getInstance() {
 		if (instance == null) {
 			synchronized (MemberDAO.class) {
@@ -35,15 +42,31 @@ public class BoardDAO {
 	}
 
 	public BoardDAO() {
+		/*
 		try {
 			Class.forName(driver);
 			System.out.println("OracleDriver.class 생성, 드라이버 로딩 성공");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		*/
+		
+		try {
+			Context context = new InitialContext();
+			ds = (DataSource) context.lookup("java:comp/env/jdbc/oracle"); // jdbc/oracle에 있는 것을 꺼내달라
+			// ds 에게 전달한다. 
+			// Tomcat의 경우 java:comp/env/를 꼭 넣어줘야한다. 다른 곳은 없어도 된다고 하심
+			
+			
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-
+	/*
 	public void getConnection() {
+		
 		try {
 			con = DriverManager.getConnection(url, username, password);
 			System.out.println("접속 성공");
@@ -51,13 +74,14 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	public int getSeq() {
 		int seq=0;
-		getConnection();
 		String sql = "select seq_board.nextval from dual";
 		
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -85,9 +109,9 @@ public class BoardDAO {
 		// ref : 그룹번호 (seq와 같은 번호이므로 seq를 바로 ref로 받아주자)
 		//String sql = "insert into boardvalues(seq_board.nextval, ?,?,?,?,?,seq_board.currval,?,?,?,?,?,sysdate)";
 		String sql = "insert into board(seq, id, name, email, subject, content, ref) values(seq_board.nextval, ?,?,?,?,?,seq_board.currval)";
-		getConnection();
 		
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, map.get("id"));
@@ -117,12 +141,12 @@ public class BoardDAO {
 	public List<BoardDTO> getBoardList(int startNum, int endNum){
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		
-		getConnection();
 		String sql = "select * from (select rownum rn, tt.* "
 				+ "from (select * from board order by ref desc, step asc)tt)"
 				+ "where rn >=? and rn <= ?";
 		
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, startNum);
@@ -170,19 +194,18 @@ public class BoardDAO {
 	}
 	
 	// 총 글 수 가져오기 
-	public int getTotalA(List<BoardDTO> list) {
+	public int getTotalA() {
 		int totalA = 0;
 		
-		getConnection();
 		String sql = "select count(*) from board";
 		
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery(); 
 			rs.next();
-			
-			totalA = rs.getInt(1);
+			totalA = rs.getInt(1); // 첫번째 컬럼 값을 가져오라 
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -206,12 +229,12 @@ public class BoardDAO {
 	public BoardDTO boardView(int seq) {
 		BoardDTO boardDTO = null;
 
-		getConnection();
 		
 		String sql = "select * from board where seq=?";
 		
 		
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, seq);
 			
@@ -259,11 +282,11 @@ public class BoardDAO {
 	public void boardModify(int seq, String subject, String content) {
 		BoardDTO boardDTO = new BoardDTO();
 		
-		getConnection();
 		
 		String sql = "update board set subject=?, content=?, logtime=sysdate where seq=?";
 		
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, boardDTO.getSubject());
 			pstmt.setString(2, boardDTO.getContent());

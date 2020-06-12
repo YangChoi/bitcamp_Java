@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
     
+<%@page import="board.bean.BoardPaging"%>
 <%@ page import="board.bean.BoardDTO"%>
 <%@ page import="board.dao.BoardDAO"%>
 
@@ -21,8 +22,15 @@ BoardDAO boardDAO = BoardDAO.getInstance();
 
 List<BoardDTO> list = boardDAO.getBoardList(startNum, endNum);
 
-int totalA = boardDAO.getTotalA(list);
-int totalP = (totalA+1)/5; // 한페이지당 글 5개 
+// 페이징 처리 
+BoardPaging boardPaging = new BoardPaging();
+int totalA = boardDAO.getTotalA(); // 총글수 
+boardPaging.setCurrentPage(pg); //pg가 현재 페이지 가지고 있음 
+boardPaging.setPageBlock(3); // 3개씩 끊는다. 
+boardPaging.setPageSize(5); // 한 페이짇 ㅏㅇ 글 5개 
+boardPaging.setTotalA(totalA); // 총 페이지 
+boardPaging.makePagingHTML();// 페이지 넘기는 링크를 띄워준다 
+
 
 %>    
 <!DOCTYPE html>
@@ -48,6 +56,15 @@ int totalP = (totalA+1)/5; // 한페이지당 글 5개
 	color:black;
 	text-decoration:none;	
 }
+
+#paging {
+	color:black;
+	text-decoration:none;
+}
+#currentPaging {
+	color:red;
+	text-decoration:underline;
+}
 </style>
 <body>
 <table border = "3" cellspacing="0" cellpadding="3" frame="hsides" rules="rows">
@@ -63,7 +80,7 @@ int totalP = (totalA+1)/5; // 한페이지당 글 5개
 <% for(BoardDTO dto : list){ %>
 		<tr>
 		<td><%=dto.getSeq() %></td>
-		<!-- js에 session값을 넘겨줘야한다, seq와 pg 값도 함께 넘겨준다 -->
+		<!--js에 session값을 넘겨줘야한다 seq와 pg 값도 함께 넘겨준다-->
 		<td><a class="subjectA" href="#" onclick="isLogin('<%=memId%>',<%=dto.getSeq() %>,<%=pg%>)"><%=dto.getSubject() %></a></td>
 		<!-- 보내주는 값에 싱글따옴표를 쳐주었기 때문에 만약 값이 null인 경우 null이라는 값이 넘어오는 것이 아닌 null이라는 문자가 넘어온다  -->
 		<td><%=dto.getName() %></td>
@@ -73,6 +90,8 @@ int totalP = (totalA+1)/5; // 한페이지당 글 5개
 <%	} %>
 <%} %>
 </table>
+<div style="border:solid 1px red; width:500px; text-align:center;"><%=boardPaging.getPagingHTML() %></div>
+
 </body>
 <script type="text/javascript">
 //글 들어갈 때 

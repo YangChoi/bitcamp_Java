@@ -1,12 +1,16 @@
 package member.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
@@ -14,16 +18,19 @@ import member.bean.ZipcodeDTO;
 public class MemberDAO {
 	private static MemberDAO instance;
 	// 싱글톤을 위해 memberDAO 객체를 생성할 때는 객체명을 싱글톤의 티가 나도록 instance로 지정해준다.
-
+	
+	/*
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String username = "c##java";
 	private String password = "bit";
+	*/
 
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-
+	private DataSource ds;
+	
 	// static으로 접근하는 singleTon 메서드
 	// instance가 null 인 경우에는 처음에 딱 한 번이다
 	public static MemberDAO getInstance() {
@@ -39,14 +46,30 @@ public class MemberDAO {
 	}
 
 	public MemberDAO() {
+		/*
 		try {
 			Class.forName(driver);
 			System.out.println("OracleDriver.class 생성, 드라이버 로딩 성공");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		*/
+		try {
+			Context context = new InitialContext();
+			ds = (DataSource) context.lookup("java:comp/env/jdbc/oracle"); // jdbc/oracle에 있는 것을 꺼내달라
+			// ds 에게 전달한다. 
+			// Tomcat의 경우 java:comp/env/를 꼭 넣어줘야한다. 다른 곳은 없어도 된다고 하심
+			
+			
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
+		
+	
+	
+	/*
 	public void getConnection() {
 		try {
 			con = DriverManager.getConnection(url, username, password);
@@ -56,16 +79,19 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
-
+	 */
+	
+	
 	// 데이터 insert
 	public int writeMember(MemberDTO memberDTO) {
 		int su = 0;
 
 		String sql = "insert into member values(?,?,?,?,?,?,?,?,?,?,?,?, sysdate)";
-
-		getConnection(); // 접속
+		
 
 		try {
+			// DataSource로 부터 connection을 얻어온다
+			con = ds.getConnection(); // 접속
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, memberDTO.getName());
@@ -107,9 +133,9 @@ public class MemberDAO {
 		
 		
 		String sql = "select * from member where id=? and pwd=?";
-		getConnection();
 
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql); // sql 처리
 
 			pstmt.setString(1, id);
@@ -159,9 +185,9 @@ public class MemberDAO {
 		boolean exist = false;
 
 		String sql = "select * from member where id=?";
-		getConnection();
 
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql); // sql 처리
 			pstmt.setString(1, id);
 
@@ -196,9 +222,9 @@ public class MemberDAO {
 
 		// sigungu 중 없는 값은 문자열 아무 거나로 채우도록 한다 (nvl)
 		String sql = "select * from newzipcode " + "where sido like ? and nvl(sigungu, '0') like ? and roadname like ?";
-		getConnection();
 
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, "%" + sido + "%");
@@ -249,10 +275,10 @@ public class MemberDAO {
 		
 		
 		String sql = "select * from member where id = ?";
-		getConnection();
 		
 
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, id);
@@ -296,7 +322,6 @@ public class MemberDAO {
 	}
 	
 	public void modifyMember(MemberDTO memberDTO) {
-		getConnection();
 		  String sql = "update member set name=?,"
                   + " pwd=?,"
                   + " gender=?,"
@@ -312,6 +337,8 @@ public class MemberDAO {
                   + " where id=?";
 		
 		try {
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberDTO.getName());
 			pstmt.setString(2, memberDTO.getPwd());
@@ -347,7 +374,6 @@ public class MemberDAO {
 	}
 	
 	public void InsertMember(MemberDTO memberDTO) {
-		getConnection();
 		String sql = "Insert into member name=?,"
 										+ "id=?"
 										+ "pwd=?,"
@@ -363,6 +389,8 @@ public class MemberDAO {
 										+ "logtime=sysdate";
 		
 		try {
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberDTO.getName());
 			pstmt.setString(2, memberDTO.getId());
