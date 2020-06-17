@@ -45,8 +45,8 @@ public class MemberDAO {
     
     public boolean isExistId(String id) {
     	boolean exist = false;
-    	
     	String sql = "select * from member where id=?";
+    	
     	try {
     		conn = ds.getConnection();
     		
@@ -55,7 +55,8 @@ public class MemberDAO {
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) exist = true;
+			if(rs.next()) exist = true;//사용 불가능
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -66,7 +67,8 @@ public class MemberDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}    	
+		}
+    	
     	return exist;
     }// isExistId()
     
@@ -108,41 +110,33 @@ public class MemberDAO {
 	}
     
     public List<ZipcodeDTO> getZipcodeList(String sido, String sigungu, String roadname){
-    	List<ZipcodeDTO> list = new ArrayList<ZipcodeDTO>();
-    	System.out.println(sido+","+sigungu+","+roadname);
-   
-    	String sql = "select * from newzipcode where sido like ? and (sigungu like ? or sigungu is null) and roadname like ? ";
+    	List<ZipcodeDTO> list = new ArrayList<ZipcodeDTO>();  
+    	String sql = "select * from newzipcode"
+    			+ " where sido like ? and (sigungu like ? or sigungu is null) and roadname like ?";
     	
     	try {
     		conn = ds.getConnection(); // 오라클 접속
     		
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, "%"+sido+"%");
 			pstmt.setString(2, "%"+sigungu+"%");
 			pstmt.setString(3, "%"+roadname+"%");
 			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				ZipcodeDTO zipcodeDTO = new ZipcodeDTO();
 				
 				zipcodeDTO.setZipcode(rs.getString("zipcode"));
 				zipcodeDTO.setSido(rs.getString("sido"));
-				// 조건연산자 
-				// 조건 ? 참 : 거짓
 				zipcodeDTO.setSigungu(rs.getString("sigungu")==null ? "" : rs.getString("sigungu"));
 				zipcodeDTO.setYubmyundong(rs.getString("yubmyundong"));				
-				// 조건연산자 
-				// 조건 ? 참 : 거짓
 				zipcodeDTO.setRi(rs.getString("ri")==null ? "" : rs.getString("ri"));
 				zipcodeDTO.setRoadname(rs.getString("roadname"));
-				// 조건연산자 
-				// 조건 ? 참 : 거짓
 				zipcodeDTO.setBuildingname(rs.getString("buildingname")==null ? "" : rs.getString("buildingname"));
 
 				list.add(zipcodeDTO);				
 			}
-			System.out.println(list.size());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -161,8 +155,8 @@ public class MemberDAO {
     
     public MemberDTO login(String id, String pwd){
     	MemberDTO memberDTO = null;	
-
 		String sql = "select * from member where id=? and pwd=?";
+		
 		try {
 			conn = ds.getConnection(); // 오라클 접속
 			
@@ -172,7 +166,7 @@ public class MemberDAO {
 			
 			rs = pstmt.executeQuery(); // 실행
 			
-			if(rs.next())
+			if(rs.next()) {
 				memberDTO = new MemberDTO();
 			
 				memberDTO.setName(rs.getString("name"));
@@ -187,7 +181,7 @@ public class MemberDAO {
 				memberDTO.setZipcode(rs.getString("zipcode"));
 				memberDTO.setAddr1(rs.getString("addr1"));
 				memberDTO.setAddr2(rs.getString("addr2"));
-			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -1,17 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그아웃</title>
+<title>logout Screen</title>
 </head>
 <body>
+
+</body>
 <script type="text/javascript">
-window.onload = function(){
+window.onload=function(){
 	alert("로그아웃");
-	location.href= "loginForm.jsp";
+	location.href="/mvcMember/member/loginForm.do";
 }
 </script>
-</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

@@ -4,58 +4,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인폼</title>
-<style>
-* {
-	font-family: 'Jeju Gothic', sans-serif;
-}
-
-th, td {
-	padding: 8px;
-	text-align: left;
-	border-bottom: 1px solid #ddd;
-}
-
-#button, #button2 {
-	background-color: white;
-	color: black;
-	border: 2px solid #3385ff;
-}
-
-#button:hover {
-	background-color: #3385ff;
-	color: white;
-}
-
-#button2:hover {
-	background-color: #3385ff;
-	color: white;
-}
-</style>
+<title>Login Form Screen</title> 
 </head>
 <body>
-	<form name="loginForm" method="post" action="/mvcMember/member/login.do">
-	<h3 text-align="center">로그인</h3>
-		<table>
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" name="id" placeholder="아이디입력" size=15>
-				</td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="pwd" placeholder="비밀번호 입력 "
-					size=15></td>
-			</tr>
-			<tr>
-				<td>
-					<input type="button" id="button" value="로그인" onclick="checkLoginForm()"> 
-					<input type="button" id="button2" value="회원가입" onclick="location.href='writeForm.jsp'" >
-				<td>
-			</tr>
-		</table>
+ <h3>로그인</h3>
+  <form name="loginForm" method="post" action="/mvcMember/member/login.do">
+   <table border="1" cellspacing="0" cellpadding="3">
+   
+    <tr>
+     <td width="100" align="center">아이디</td>
+     <td><input type="text" name="id" placeholder="아이디입력"></td>
+    </tr>
+    
+    <tr>
+     <td width="100" align="center">비밀번호</td>
+     <td><input type="text" name="pwd" placeholder="비밀번호입력"></td>
+    </tr>   
+    
+    <tr> 
+     <td colspan="2" align="center">
+	 <input type="button" onclick="checkLoginForm()" value="로그인"> &emsp; 
+	 <input type="button" onclick="location.href='writeForm.jsp'" value="회원가입" ></td>
+    </tr>
 
-	</form>
+   </table> 
 </body>
 <script type="text/javascript" src="../js/member.js"></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
