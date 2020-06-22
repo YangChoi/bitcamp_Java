@@ -84,15 +84,9 @@ public class UserDAO {
 		
 	}
 
-	public List<UserDTO> search(int choice, String keyword) {
+	public List<UserDTO> search(Map map) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		if(choice == 1) {
-			List<UserDTO> list = sqlSession.selectList("userSQL.search", keyword);
-		
-		}else if(choice == 2) {
-			List<UserDTO> list = sqlSession.selectList("userSQL.search", keyword);
-			
-		}
+		List<UserDTO> list = sqlSession.selectList("userSQL.search", map);
 		
 		sqlSession.close();
 		

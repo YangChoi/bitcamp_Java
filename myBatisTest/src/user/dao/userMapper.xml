@@ -18,8 +18,8 @@
 	<select id="delete" parameterType="String" resultType="user.bean.UserDTO">
 		delete usertable where id=#{id}
 	</select>
-	<select id="search" parameterType="keyword" resultType="user.bean.UserDTO">
-		select * from usertable where id like '%'||#{keyword}||'%'
+	<select id="search" parameterType="map" resultType="user.bean.UserDTO">
+		select * from usertable where id like '%'||#{map}||'%'
 	</select>
 </mapper>
 
