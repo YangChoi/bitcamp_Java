@@ -3,23 +3,36 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userSQL">
-	<insert id="write" parameterType="user.bean.UserDTO">
+	<resultMap type="user" id="userResult">
+		<result property="name" column="NAME" />
+		<result property="id" column="ID" />
+		<result property="pwd" column="PWD" />
+	</resultMap>
+	<insert id="write" parameterType="user">
 		insert into usertable values(#{name},#{id},#{pwd})
 	</insert>
-	<select id="getUserList" resultType="user.bean.UserDTO">
+	<select id="getUserList" resultMap="userResult">
 		select * from usertable
 	</select>
-	<select id="getUser" parameterType="String" resultType="user.bean.UserDTO">
+	<select id="getUser" parameterType="String" resultType="user">
 		select * from usertable where id=#{id}
 	</select>
-	<select id="modify" parameterType="java.util.Map" resultType="user.bean.UserDTO">
+	<select id="modify" parameterType="java.util.Map" resultType="user">
 		update usertable set name=#{name}, pwd=#{pwd} where id=#{id}
 	</select>
-	<select id="delete" parameterType="String" resultType="user.bean.UserDTO">
+	<select id="delete" parameterType="String" resultType="user">
 		delete usertable where id=#{id}
 	</select>
-	<select id="search" parameterType="map" resultType="user.bean.UserDTO">
-		select * from usertable where id like '%'||#{map}||'%'
+	<select id="search" parameterType="java.util.Map" resultType="user">
+		<!--  select * from usertable where ${searchType} like '%'||#{searchValue}||'%'-->
+		
+		select * from usertable where
+		<if test="searchType == 'name'">
+			name like '%'||#{searchValue}||'%'
+		</if>
+		<if test="searchType == 'id'">
+			id like '%'||#{searchValue}||'%'
+		</if>
 	</select>
 </mapper>
 
