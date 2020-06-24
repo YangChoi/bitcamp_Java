@@ -1,5 +1,6 @@
 function checkWriteForm() {
-	if (document.writeForm.name.value == "") {
+	//if(document.getElementById("name").value == "") { // 이거는 id속성으로 해서 찾는것
+	if (document.writeForm.name.value == "") { // name 속성으로 찾는 법
 		alert("이름을 입력하세요");
 		document.writeForm.name.focus();
 	} else if (document.writeForm.id.value == "") {
@@ -47,7 +48,7 @@ function checkId(){
 		alert("아이디를 먼저 입력해주세요");
 		document.writeForm.id.focus();		
 	}else {
-		window.open("/mvcMember/member/checkId.do?id="+id , "", "width=300 heigth=100 location=yes");
+		window.open("/miniProject/member/checkId.do?id="+id , "", "width=300 heigth=100 location=yes");
 	}
 }
 

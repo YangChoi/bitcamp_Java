@@ -30,20 +30,13 @@ th, td {
 #button2:hover {
 	background-color: #3385ff;
 	color: white;
-	
-	
-	
-	
-	
-	
+
 	
 }
 </style>
 </head>
 <body>
-	<jsp:include page ="../template/top.jsp" />
 	<form name="loginForm" method="post" action="/miniProject/member/login.do">
-	<h3 text-align="center">로그인</h3>
 		<table>
 			<tr>
 				<td>아이디</td>
@@ -56,9 +49,9 @@ th, td {
 					size=15></td>
 			</tr>
 			<tr>
-				<td>
-					<input type="button" id="button" value="로그인" onclick="checkLoginForm()"> 
-					<input type="button" id="button2" value="회원가입" onclick="location.href='writeForm.jsp'" >
+				<td colspan="2" align="center">
+					 <input type="button" onclick="checkLoginForm()" value="로그인"> &emsp; 
+					 <input type="button" onclick="location.href='/miniProject/member/writeForm.do'" value="회원가입" ></td>
 				<td>
 			</tr>
 		</table>

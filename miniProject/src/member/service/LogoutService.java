@@ -16,7 +16,8 @@ public class LogoutService implements CommandProcess {
 
 		HttpSession session = request.getSession(); //세션 생성
 		session.invalidate();
-		return "/member/logout.jsp";
+		request.setAttribute("display", "/member/logout.jsp");
+		return "/main/index.jsp";
 	}
 
 }
