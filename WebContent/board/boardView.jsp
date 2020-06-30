@@ -22,5 +22,5 @@
 	
 	<c:if test="${boardDTO.id == memId }">
 	<input type="button" id="button5" value="글수정" onclick="location.href='boardModifyForm.do?seq=${boardDTO.seq }&pg=${pg }'">
-	<input type="button" id="button6" value="글삭제" onclick="$"> 
+	<input type="button" id="button6" value="글삭제" onclick="location.href='boardDelete.do?seq=${boardDTO.seq}'"> 
 	</c:if>

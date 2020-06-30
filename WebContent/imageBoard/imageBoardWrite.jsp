@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript">
 window.onload=function(){
-	alert("글 삭제 완료");
-	location.href="/miniProject/board/boardList.do?pg=1";
-	// pg 값을 가져가야한다. 
+	alert("작성하신 글을 저장 하였습니다");
+	// 갈때 페이지 넘버도 같이 가야한다. 
+	location.href="../imageBoard/imageBoardList.do?pg=1";
 }
 </script>

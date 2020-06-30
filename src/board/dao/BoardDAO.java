@@ -156,9 +156,20 @@ public class BoardDAO {
 		
 	}
 
-	public void boardDelete() {
+
+	public void boardDelete(int seq) {
+		// 원글을 찾아서 reply(답글 수) 감소
+		// 답글을 찾아서 제목에 추가 
 		
+		// 삭제
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		sqlSession.update("boardSQL.boardDelete", seq);
+		sqlSession.commit();
+		sqlSession.close();
 		
 	}
 
+
+
+	
 }

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import com.control.CommandProcess;
 
-import board.bean.BoardDTO;
 import board.dao.BoardDAO;
 
 public class BoardWriteService implements CommandProcess {
@@ -36,6 +35,8 @@ public class BoardWriteService implements CommandProcess {
 
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		boardDAO.boardWrite(map);
+		
+	
 		
 		request.setAttribute("display", "/board/boardWrite.jsp");
 		return "/main/index.jsp";

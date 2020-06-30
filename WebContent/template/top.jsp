@@ -12,6 +12,12 @@ onclick="location.href='/miniProject/main/index.do'" style="cursor: pointer;"> M
 
 <c:if test="${memId != null }">
 	<a href="../board/boardWriteForm.do">글쓰기</a> &emsp;
+	<c:if test="${memId == 'admin'}">
+	<a href="../imageBoard/imageBoardWriteForm.do">이미지등록</a> &emsp;
+	</c:if>
 </c:if>
 
 <a href="../board/boardList.do?pg=1">목록</a> &emsp;
+<c:if test="${memId == 'admin'}">
+<a href="../imageBoard/imageBoardList.do?pg=1">이미지목록</a> &emsp;
+</c:if>

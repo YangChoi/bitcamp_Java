@@ -7,6 +7,7 @@
 		<typeAlias type="member.bean.MemberDTO" alias="member"/>
 		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcode"/>
 		<typeAlias type="board.bean.BoardDTO" alias="board"/>
+		<typeAlias type="imageBoard.bean.ImageBoardDTO" alias="imageBoard"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -16,7 +17,7 @@
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
 				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-				<property name="username" value="c##java"/>
+				<property name="username" value="java"/>
 				<property name="password" value="bit"/>
 			</dataSource>
 		</environment>
@@ -25,6 +26,7 @@
 	<mappers>
 		<mapper resource="member/dao/memberMapper.xml"/>
 		<mapper resource="board/dao/boardMapper.xml"/>
+		<mapper resource="imageBoard/dao/imageBoardMapper.xml"/>
 		
 	</mappers>
 </configuration>
