@@ -6,68 +6,55 @@
 </head>
 <body>
 <form name="testForm" method="post">
- <table border="1">
-  <tr>
-   <td>이름</td>
-   <td><input type="text" name="name"></td>
-  </tr>
-  
-  <tr>
-   <td>생년월일</td>
-   <td><input type="text" name="birth" placeholder="ex)1988/12/18"></td>
-  </tr>
-  
-  <tr>
-    <td colspan="2" align="center">
-     <input type="button" value="보내기" onclick="testToServer()">
-     <input type="reset" value="취소">
-    </td>
-   </tr>
- </table>
- <br><br>
- <div id="result"></div>
-
+	<table border='1'>
+		<tr>
+			<td>이름</td>
+			<td>
+				<input type="text" name="name">
+			</td>
+		</tr>
+		<tr>
+			<td>생년월일</td>
+			<td>
+				<input type="text" name="birth" placeholder="ex)1996.08.22">
+			</td>
+		</tr>
+		<tr>
+			<td colspan ="2" align ="center">
+			<input type="button" value="보내기" onclick="testToServer()">
+			<input type="reset" value="취소">
+			</td>
+		</tr>
+	</table>
+	<br><br>
+	<div id="result"></div>
 </form>
 </body>
 <script type="text/javascript">
-let httpRequest;
+let	httpRequest;
 function testToServer(){
 	let name = encodeURIComponent(document.testForm.name.value);
 	let birth = document.testForm.birth.value;
 	
 	httpRequest = new XMLHttpRequest();
 	httpRequest.onreadystatechange = testFromServer;
+	
 	httpRequest.open("POST", "test.jsp", true);
-	httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");      
+	httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 	httpRequest.send("name="+name+"&birth="+birth);
 }
-
 function testFromServer(){
 	if(httpRequest.readyState==4){
 		if(httpRequest.status==200){
 			//alert(httpRequest.responseText.trim());
-			
 			let div = document.getElementById("result");
-			//div.innerText = httpRequest.responseText.trim();
-			div.innerHTML = "<font color=blue>"+httpRequest.responseText.trim()+"</font>";
+			//div.innerText = "<b>"+httpRequest.responseText.trim()+"</b>";
+			div.innerHTML = "<b><font color=blue>"+httpRequest.responseText.trim()+"</b>";
 			
-		}else{
-			alert(httpRequest.status);
+		}else {
+			alert(httpRequest.status); // 에러 시 에러코드 뜨게 한다
 		}
 	}
 }
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

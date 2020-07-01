@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>
+				<input type="text" id="dan" placeholder="단 입력">
+			</td>
+		
+			<td>
+				<input type="button" value="결과" onclick="gugudanRequest()">
+			</td>
+		</tr>
+	</table>
+	<div id="result"></div>
+
+</body>
+<script type="text/javascript">
+let httpRequest = null;
+function gugudanRequest(){
+	let dan = document.getElementById("dan").value;
+	httpRequest = new XMLHttpRequest();
+	httpRequest.onreadystatechange = gugudanRequestFromServer;
+	httpRequest.open("GET", "getGugudan.jsp?dan="+dan, true);
+	httpRequest.send();
+}
+
+function gugudanRequestFromServer(){
+	if(httpRequest.readyState == 4){
+		if(httpRequest.status == 200){
+			result.innerHTML = httpRequest.responseText; // result 값 가져오기
+		}else {
+			alert(httpRequest.status);
+		}
+	}
+}
+</script>
+</html>

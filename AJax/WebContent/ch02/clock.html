@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>시계</title>
+</head>
+<body>
+현재 시간은 <span id="clock" style="border:1px dotted red"></span> 입니다. 
+</body>
+<script type="text/javascript">
+window.onload=function(){
+	printTime();
+}
+function printTime(){
+	let clock = document.getElementById("clock");
+	let now = new Date(); // 객체를 가져온다 
+	
+	//clock.innerHTML = now; // clock의 innerhtml에 now를 넣는다.  
+	clock.innerHTML = now.getFullYear() + "년"
+						+ (now.getMonth()+1) + "월"
+						+ now.getDate() + "일"
+						+ now.getHours() + "시"
+						+ now.getMinutes() + "분"
+						+ now.getSeconds() + "초";
+	setTimeout("printTime()", 1000);
+	// 단위 : 1/1000초 
+}
+</script>
+</html>

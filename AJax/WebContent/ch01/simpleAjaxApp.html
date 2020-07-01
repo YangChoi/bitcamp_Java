@@ -2,42 +2,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ajax 실습</title>
 </head>
 <body>
 <input type="button" value="simple.jsp" onclick="load('simple.jsp')">
 </body>
 <script type="text/javascript">
-var httpRequest;
+var XMLHttpRequest;
 function load(url){
 	httpRequest = new XMLHttpRequest();
-	httpRequest.onreadystatechange = viewMessage;
-	httpRequest.open("GET", url, true);
-	httpRequest.send("");	
+	httpRequest.onreadystatechange = viewMessage; 
+	// viewMessage라는 함수로 가라 라고 할 때는 함수명만 입력한다 괄호 입력하지 말것
+	httpRequest.open("GET", url);
+	// url = simple.jsp
+	httpRequest.send("");
 }
-
 function viewMessage(){
 	if(httpRequest.readyState==4){
 		if(httpRequest.status==200){
-			//alert(httpRequest.responseText);
-			console.log(httpRequest.responseText)
-		}else{
+			alert(httpRequest.responseText);
+			
+		}else {
 			alert(httpRequest.status);
 		}
 	}
 }
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
