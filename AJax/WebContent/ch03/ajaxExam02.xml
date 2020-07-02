@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<curriculum>
+	<subject>
+		<codeNumber>A101</codeNumber>
+		<titleNumber>XML</titleNumber>
+		<roomNumber>301</roomNumber>
+	</subject>
+	<subject>
+		<codeNumber>A103</codeNumber>
+		<titleNumber>JSP</titleNumber>
+		<roomNumber>302</roomNumber>
+	</subject>
+	<subject>
+		<codeNumber>A109</codeNumber>
+		<titleNumber>AJAX</titleNumber>
+		<roomNumber>303</roomNumber>
+		<subject>
+		<codeNumber>A104</codeNumber>
+		<titleNumber>JAVA</titleNumber>
+		<roomNumber>304</roomNumber>
+	</subject>
+	<subject>
+		<codeNumber>A100</codeNumber>
+		<titleNumber>HTML</titleNumber>
+		<roomNumber>305</roomNumber>
+	</subject>
+	</subject>
+</curriculum>

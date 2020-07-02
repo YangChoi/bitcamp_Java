@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	책 정보를 alert으로 출력
+	<br>
+	<br>
+	<div id="message"></div>
+</body>
+<script type="text/javascript">
+	window.onload=function() {
+		loadBooks();
+	}
+	let httpRequest = null;
+	function loadBooks() {
+		httpRequest = new XMLHttpRequest();
+		httpRequest.onreadystatechange = loadedBooks;
+		httpRequest.open("GET", "books.jsp", true);
+		httpRequest.send(null);
+	}
+	function loadedBooks() {
+		if (httpRequest.readyState == 4) {
+			if (httpRequest.status == 200) {
+				let xmlDoc = httpRequest.responseXML;
+
+				var bookList = xmlDoc.getElementsByTagName("book");
+				let message = "책 개수 : " + bookList.length + "권<br>";
+
+				/*
+				for(i = 0; i < bookList.length; i++){
+					let book = bookList.item(i);
+					
+					let titleValue = book.getElementsByTagName("title").item(0).firstChild.nodeValue;
+					// getElements : 여러개를 가지고 온다는 뜻 
+					// 여기까지 하면 textNode를 얻는거 (firstChild 까지)
+					let authorValue = book.getElementsByTagName("author").item(0).firstChild.nodeValue;
+					
+					//message += titleValue + "(" + authorValue+ ")\n";
+					message += titleValue + "(" + authorValue+ ")<br>";
+				}
+				 */
+
+				for (i = 0; i < bookList.length; i++) {
+					let book = bookList[i].childNodes;
+	
+					console.log("책 갯수 : " + book.length);
+					for (j = 0; j < book.length; j++) {
+						if(book[j].firstChild != null){
+							if(j == 1) message += "(";
+							// 0이면 그냥 떨어진다. 
+							message += book[j].firstChild.nodeValue;
+							// 첫번째 자식이 널이 아닌 것들만 붙인다. 
+						}
+						
+					}// for j
+					
+					message += ")<br>";
+					
+				} // for i 
+
+				//alert(message);
+				document.getElementById("message").innerHTML = message;
+			}
+		}
+	}
+</script>
+</html>

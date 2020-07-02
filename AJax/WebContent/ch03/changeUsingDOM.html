@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type="button" value="추가" onclick="appendItem()" />
+<div id="itemList" style="border:1px double blue;"></div>
+</body>
+<script type="text/javascript">
+let count = 0;
+function appendItem(){
+	count++; // item_1, item_2, item_3...
+	var newItem = document.createElement("div"); // div 태그 만들기
+	newItem.setAttribute("id", "item_" + count); // setAttribute : 속성 넣기
+	newItem.setAttribute("style", "border : 1px dotted red");
+	
+	let html = "새로 추가된 아이템[" + count + "] <input type='button' value='삭제' onclick='removeItem("+count+")'/>";
+	
+	// div 태그 사이에 넣는다. 
+	newItem.innerHTML = html;
+	var itemListNode = document.getElementById("itemList");
+	itemListNode.appendChild(newItem);
+}
+
+function removeItem(count){
+	var item = document.getElementById("item_" + count);
+	if(item != null){
+		item.parentNode.removeChild(item); // item으로부터 부모노드를 얻고 그 부모노드를 없앤다. 
+		// 부모노트 입장에서 아랫것을 없애는 것. 
+	}
+}
+</script>
+</html>

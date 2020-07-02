@@ -2,8 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>구구단</title>
 </head>
+<style type="text/css">
+	#result{
+		visibility : hidden;
+		padding : 20px;
+	}
+
+</style>
 <body>
 	<table>
 		<tr>
@@ -16,8 +23,7 @@
 			</td>
 		</tr>
 	</table>
-	<div id="result"></div>
-
+	<div id="result" style="border: 1px #9933ff solid; width:200px;"></div>
 </body>
 <script type="text/javascript">
 let httpRequest = null;
@@ -29,10 +35,15 @@ function gugudanRequest(){
 	httpRequest.send();
 }
 
+// 응답이 올 시에 실행되는 콜백함수 
 function gugudanRequestFromServer(){
 	if(httpRequest.readyState == 4){
 		if(httpRequest.status == 200){
+			let result = document.getElementById("result");
 			result.innerHTML = httpRequest.responseText; // result 값 가져오기
+			
+			result.style.visibility ="visible";
+
 		}else {
 			alert(httpRequest.status);
 		}
