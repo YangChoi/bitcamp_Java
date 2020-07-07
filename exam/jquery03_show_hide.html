@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btn1">slideUp</button>
+<button id="btn2">slideDown</button>&nbsp;&nbsp;&nbsp;
+
+<button id="btn3">fadeIn</button>
+<button id="btn4">fadeOut</button>&nbsp;&nbsp;&nbsp;
+
+<button id="btn5">slide toggle</button>
+<button id="btn6">fade toggle</button>
+<button id="btn7">toggle</button>
+
+<p>이미지</p>
+<img src="../image/kiki.gif">
+</body>
+<script type="text/javascript"src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn1').click(function(){
+		$('img').slideUp(1000); // 10의 -1승, fast, slow로 줄 수도 있음
+	});
+	
+	$('#btn2').click(function(){
+		$('img').slideDown('fast');
+	});
+	
+	$('#btn3').click(function(){
+		$('img').fadeIn(1000); 
+	});
+	
+	$('#btn4').click(function(){
+		$('img').fadeOut('fast');
+	});
+
+	$('#btn5').click(function(){
+		$('img').slideToggle(1000);
+	});
+	
+	$('#btn6').click(function(){
+		$('img').fadeToggle(1000);
+	});
+	
+	$('#btn7').click(function(){
+		$('img').toggle('fast');
+	});
+	
+	
+	
+	
+});
+</script>
+</html>

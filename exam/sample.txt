@@ -1,0 +1,27 @@
+<h2>jQuery 신기한 로딩 </h2>
+<table>
+	<tr id = "key">
+		<th> 이름 </th>
+		<th> 나이 </th>
+		<th> 주소 </th>
+	</tr>
+	
+	<tr class = "value">
+		<th> 양아무개 </th>
+		<th> 22 </th>
+		<th> 서울 </th>
+	</tr>
+	
+	<tr class = "value">
+		<th> 박아무개 </th>
+		<th> 29 </th>
+		<th> 부산 </th>
+	</tr>
+	
+	<tr class = "value">
+		<th> 최아무개 </th>
+		<th> 32 </th>
+		<th> 울산 </th>
+	</tr>
+
+</table>
