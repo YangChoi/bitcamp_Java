@@ -17,16 +17,22 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	//jQueryAJax04_data.js 호출
-	$.getScript('jQueryAJax04_data.js');
+	$.getScript('jQueryAJax04_data.js'); 
 	
 	$('#submit').click(function(){
-		let result = setName($('.user').val())
+		let result = setName($('.user').val()); // js에 값을 보낸다. 
 		$('#message').html(result);
 	});
 });
+// javascript는 화면이동 없이 동적으로 바로바로 변경한다. 
+
 </script>
 </body>
 </html>
+
+
+
+
 
 
 

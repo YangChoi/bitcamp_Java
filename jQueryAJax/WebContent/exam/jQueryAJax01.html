@@ -1,61 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
-<div id="dataArea"></div>
-
+<form>
+	<label>ÀÌ¸§À» ÀÔ·ÂÇÏ½Ã¿À</label>
+</form>
+</body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$.ajax({
-		type: 'get',
+		type : 'get',
 		url : 'jQueryAJax01_data.jsp',
-		//data: 'age='+25
-		data: {'age': 25},
-		dataType: 'text',
-		success: function(result){
-			alert('ì„±ê³µ');
-			$('#dataArea').text(result);
+		//data : 'age = ' + 25
+		data : {'age' : 25}, // json Ç¥±â¹ý (º¸³¾ µ¥ÀÌÅÍ)
+		dataType : 'text',
+		success : function(result){ // jsp¿¡¼­ ÀÀ´ä(°á°ú¹°)Àº ¿©±â·Î µé¾î¿Â´Ù 
+			alert('¼º°ø');
+		$('#dataArea').text(result);
 		},
-		error: function(){
-			alert('ì‹¤íŒ¨');
-		}
 		
 	});
+	// jquery¿Í ajax ¿¬µ¿ 
 });
 </script>
-</body>
 </html>
 
 <!-- 
- ì†ì„±                   ì„¤ëª…
- type        http ì „ì†¡ methodë¥¼ ì§€ì •í•œë‹¤. 
+ ¼Ó¼º                   ¼³¸í
+ type        http Àü¼Û method¸¦ ÁöÁ¤ÇÑ´Ù. 
              GET, POST
  
- url         í˜¸ì¶œ URL 
- 			 GET ë°©ì‹ì¼ê²½ìš° URL ë’¤ì— íŒŒë¼ë¯¸í„°ë¥¼ ë¶™ì—¬ì„œ ì‚¬ìš©í•´ë„ ëœë‹¤.
+ url         È£Ãâ URL 
+ 			 GET ¹æ½ÄÀÏ°æ¿ì URL µÚ¿¡ ÆÄ¶ó¹ÌÅÍ¸¦ ºÙ¿©¼­ »ç¿ëÇØµµ µÈ´Ù.
 
- data		  ì„œë²„ë¡œ ë³´ë‚¼ ë°ì´í„° 			  
+ data		  ¼­¹ö·Î º¸³¾ µ¥ÀÌÅÍ 			  
  
- dataType  	 Ajaxë¥¼ í†µí•´ í˜¸ì¶œí•œ íŽ˜ì´ì§€ì˜ Return í˜•ì‹ì´ë‹¤. 
-                          í˜•ì‹ì— ë”°ë¼ xml, json, html, text ë“±ì„ ì‚¬ìš©í•˜ë©´ ëœë‹¤.
+ dataType  	 Ajax¸¦ ÅëÇØ È£ÃâÇÑ ÆäÀÌÁöÀÇ Return Çü½ÄÀÌ´Ù. 
+                          Çü½Ä¿¡ µû¶ó xml, json, html, text µîÀ» »ç¿ëÇÏ¸é µÈ´Ù.
  
- error       ì—ëŸ¬ë‚¬ì„ë•Œì˜ ì²˜ë¦¬ ë¶€ë¶„ì´ë‹¤. 
+ error       ¿¡·¯³µÀ»¶§ÀÇ Ã³¸® ºÎºÐÀÌ´Ù. 
  
- success     ì„±ê³µí–ˆì„ë•Œì˜ ì²˜ë¦¬ ë¶€ë¶„ì´ë‹¤. 
-                          ë³´í†µ í•´ë‹¹ ë¶€ë¶„ì—ì„œ ë°ì´í„° í•¸ë“¤ë§ì„ í•˜ë©´ ëœë‹¤.
+ success     ¼º°øÇßÀ»¶§ÀÇ Ã³¸® ºÎºÐÀÌ´Ù. 
+                          º¸Åë ÇØ´ç ºÎºÐ¿¡¼­ µ¥ÀÌÅÍ ÇÚµé¸µÀ» ÇÏ¸é µÈ´Ù.
 -->
-
-
-
-
-
-
-
-
-
-
 

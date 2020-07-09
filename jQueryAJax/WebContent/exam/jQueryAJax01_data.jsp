@@ -1,3 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-ë°›ì•„ì˜¨ ë°ì´í„° ê°’ : ${param.age }
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+
+<%-- ³Ñ¾î¿Â µ¥ÀÌÅÍÀÇ º¯¼ö¸í : name --%>
+¹Ş¾Æ¿Â µ¥ÀÌÅÍ °ª : ${param.age	};

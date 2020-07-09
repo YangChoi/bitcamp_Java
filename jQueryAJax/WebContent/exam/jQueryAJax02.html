@@ -17,25 +17,29 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#submit').click(function(){
-		let sendData = 'username=' + $('input[name=username]').val();
-		//let sendData = {'username': $('.user').val()};
+		let sendData = $('.user').val();
+		/*
+		post 방식
+		$.post('jQueryAJax02_data.jsp', //url
+				'username='+sendData, //서버로 보낼 데이터, data
+				function(data){ //success
+					$('#message').html(data);
+				},
+				'html' //dataType
+				);
+		*/
 		
-		$.ajax({
-			//type: 'get',
-			type: 'post',
-			url: 'jQueryAJax02_data.jsp',
-			data: sendData,
-			dataType: 'html',
-			success: function(data){
-				$('#message').html(data);
-			}
-		});
+		$.get('jQueryAJax02_data.jsp?username='+sendData,
+				function(data){
+					$('#message').html(data);
+				},
+				'html'
+				);
 	});
 });
 </script>
 </body>
 </html>
-
 
 
 
